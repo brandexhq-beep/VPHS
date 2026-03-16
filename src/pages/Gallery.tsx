@@ -16,6 +16,25 @@ const galleryItems = [
   { id: 9, title: "School Assembly", category: "Campus Life", type: "video" as const, videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
 ];
 
+// Campus marquee photos — two rows with different images
+const marqueeRow1 = [
+  { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=600", label: "School Grounds" },
+  { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600", label: "Classroom" },
+  { src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600", label: "Science Lab" },
+  { src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=600", label: "Study Hall" },
+  { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", label: "Campus" },
+  { src: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=600", label: "Library" },
+];
+
+const marqueeRow2 = [
+  { src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600", label: "Sports Day" },
+  { src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=600", label: "Annual Day" },
+  { src: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=600", label: "Computer Lab" },
+  { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600", label: "Workshop" },
+  { src: "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?auto=format&fit=crop&q=80&w=600", label: "Assembly" },
+  { src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=600", label: "Reading Corner" },
+];
+
 const Gallery = () => {
   const [filter, setFilter] = useState("All");
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -24,18 +43,80 @@ const Gallery = () => {
 
   return (
     <div>
-      <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
+      {/* Hero */}
+      <section className="bg-muted pt-28 md:pt-36 pb-10 relative overflow-hidden">
         <motion.div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
         <div className="container max-w-3xl relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary tracking-tight text-balance mb-6">Gallery</h1>
-            <p className="text-foreground/70 leading-relaxed text-pretty text-lg">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary tracking-tight text-balance mb-4">Gallery</h1>
+            <p className="text-foreground/70 leading-relaxed text-lg">
               Glimpses of life at Vignan Public High School.
             </p>
           </motion.div>
         </div>
       </section>
 
+      {/* Campus Marquee Strip */}
+      <section className="py-10 overflow-hidden bg-muted border-y border-primary/5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="mb-3 container"
+        >
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary/50">Campus Life</p>
+        </motion.div>
+
+        {/* Row 1 — scrolls left */}
+        <div className="overflow-hidden mb-3">
+          <div className="marquee-track gap-3 flex">
+            {[...marqueeRow1, ...marqueeRow1].map((photo, idx) => (
+              <div
+                key={idx}
+                className="relative shrink-0 w-52 h-36 md:w-64 md:h-44 rounded-2xl overflow-hidden shadow-sm border border-primary/5 group"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.label}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute bottom-2 left-3 text-white text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {photo.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 — scrolls right */}
+        <div className="overflow-hidden">
+          <div className="marquee-track-rtl gap-3 flex">
+            {[...marqueeRow2, ...marqueeRow2].map((photo, idx) => (
+              <div
+                key={idx}
+                className="relative shrink-0 w-52 h-36 md:w-64 md:h-44 rounded-2xl overflow-hidden shadow-sm border border-primary/5 group"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.label}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="absolute bottom-2 left-3 text-white text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {photo.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-muted to-transparent z-10" style={{ position: 'absolute' }} />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-muted to-transparent z-10" style={{ position: 'absolute' }} />
+      </section>
+
+      {/* Filtered Gallery */}
       <section className="container py-16 md:py-24">
         <div className="flex flex-wrap gap-2 mb-10">
           {categories.map((cat) => (
@@ -82,7 +163,6 @@ const Gallery = () => {
                       <ImageIcon size={32} className="text-primary/20" />
                     </div>
                   )}
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 flex items-end">
                     <div className="w-full p-4 bg-gradient-to-t from-foreground/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <p className="text-sm font-medium text-background">{item.title}</p>
