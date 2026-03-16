@@ -1,7 +1,7 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
@@ -41,12 +41,27 @@ const facilities = [
 ];
 
 const events = [
-  { title: "Annual Day Celebrations 2025", date: "March 15, 2025", description: "A grand celebration of student achievements with cultural performances and award ceremonies." },
-  { title: "Science Exhibition", date: "February 20, 2025", description: "Students showcase innovative science projects and experiments." },
-  { title: "Sports Day", date: "January 26, 2025", description: "Inter-house sports competitions celebrating athleticism and teamwork." },
+  { title: "Annual Day Celebrations 2025", date: "March 15, 2025", description: "A grand celebration of student achievements with cultural performances and award ceremonies.", image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=600" },
+  { title: "Science Exhibition", date: "February 20, 2025", description: "Students showcase innovative science projects and experiments.", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" },
+  { title: "Sports Day", date: "January 26, 2025", description: "Inter-house sports competitions celebrating athleticism and teamwork.", image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600" },
+];
+
+const heroImages = [
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=2000",
+  "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=2000",
 ];
 
 const Index = () => {
+  const [currentHero, setCurrentHero] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHero((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -61,12 +76,19 @@ const Index = () => {
           className="absolute inset-0 z-0"
           style={{ y: heroY, scale: heroScale }}
         >
-          <img 
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=2000" 
-            alt="School Campus" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-white/80 dark:bg-black/60 backdrop-blur-[2px]" />
+          <AnimatePresence mode="popLayout">
+            <motion.img 
+              key={currentHero}
+              src={heroImages[currentHero]} 
+              alt="School Campus" 
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-white/70 dark:bg-black/60 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-muted" />
         </motion.div>
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container py-20 md:py-32 relative">
@@ -218,13 +240,13 @@ const Index = () => {
                 whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } }}
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 group-hover:bg-primary/20 transition-all duration-700" />
-                <div className="mb-6 h-40 rounded-xl overflow-hidden relative">
+                <div className="mb-6 h-48 md:h-56 rounded-xl overflow-hidden relative shadow-lg">
                   <img 
                     src={i === 0 ? "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" : i === 1 ? "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=600" : "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600"} 
                     alt={cat.category} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-primary mb-4 relative">{cat.category}</h3>
                 <ul className="space-y-3 relative">
@@ -311,20 +333,30 @@ const Index = () => {
             {events.map((event, i) => (
               <motion.div
                 key={event.title}
-                className="glass-card rounded-2xl p-8 group relative overflow-hidden"
+                className="bg-background rounded-2xl p-0 group relative overflow-hidden shadow-elegant border border-primary/5 flex flex-col"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12 }}
                 whileHover={{ y: -6, transition: { duration: 0.3 } }}
               >
-                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-300">
-                  <Calendar size={64} className="text-primary" />
+                <div className="h-44 w-full overflow-hidden relative">
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute top-4 right-4 bg-background/95 backdrop-blur-sm pb-1 px-3 pt-2 rounded-lg text-center shadow-lg border border-primary/10">
+                    <p className="text-[10px] font-bold text-accent uppercase tracking-wider">{event.date.split(' ')[0]}</p>
+                    <p className="text-xl font-black text-primary leading-tight">{event.date.split(' ')[1].replace(',', '')}</p>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <p className="text-xs font-bold text-secondary uppercase tracking-wider mb-3">{event.date}</p>
-                <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{event.title}</h3>
-                <p className="text-sm text-foreground/70 leading-relaxed">{event.description}</p>
+                <div className="p-6 flex-1 flex flex-col relative bg-background">
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{event.title}</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed mb-6">{event.description}</p>
+                  <div className="mt-auto flex items-center gap-2 text-xs font-bold text-secondary uppercase tracking-wider">
+                    <Calendar size={14} className="text-accent" />
+                    {event.date}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -335,31 +367,31 @@ const Index = () => {
       </section>
 
       {/* Admissions CTA */}
-      <section className="container py-16 md:py-24">
+      <section className="container py-20 md:py-32">
         <motion.div
-          className="bg-primary rounded-2xl p-8 md:p-14 text-center relative overflow-hidden"
+          className="bg-primary rounded-[2.5rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] max-w-6xl mx-auto"
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
         >
           <motion.div
-            className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-accent/10"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ repeat: Infinity, duration: 6 }}
+            className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-accent/15 blur-2xl"
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-secondary/10"
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ repeat: Infinity, duration: 8, delay: 1 }}
+            className="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-secondary/20 blur-2xl"
+            animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }}
+            transition={{ repeat: Infinity, duration: 10, delay: 1, ease: "easeInOut" }}
           />
-          <div className="relative">
-            <h2 className="text-2xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">Admissions Open for 2025-26</h2>
-            <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto">
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground mb-6 md:mb-8 leading-tight">Admissions Open for 2025-26</h2>
+            <p className="text-primary-foreground/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium">
               Give your child the gift of quality education. Join the Vignan family and watch them grow into confident, knowledgeable individuals.
             </p>
             <Link
               to="/admissions"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group"
+              className="inline-flex items-center justify-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-white text-primary font-bold rounded-2xl hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group text-lg md:text-xl"
             >
-              Apply Now <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Apply Now <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </motion.div>

@@ -14,15 +14,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-4">Quick Links</h4>
-            <nav className="flex flex-col gap-2">
-              {["About", "Academics", "Admissions", "Contact"].map((link) => (
+            <h4 className="font-heading text-lg font-semibold mb-6">Sitemap</h4>
+            <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
+              {[
+                { label: "Home", path: "/" },
+                { label: "About Us", path: "/about" },
+                { label: "Academics", path: "/academics" },
+                { label: "Faculty", path: "/faculty" },
+                { label: "Gallery", path: "/gallery" },
+                { label: "Events", path: "/events" },
+                { label: "Admissions", path: "/admissions" },
+                { label: "Contact Us", path: "/contact" },
+              ].map((link) => (
                 <Link
-                  key={link}
-                  to={`/${link.toLowerCase()}`}
-                  className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  key={link.label}
+                  to={link.path}
+                  className="text-sm text-primary-foreground/70 hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
-                  {link}
+                  <span className="w-1 h-1 rounded-full bg-primary-foreground/30 group-hover:bg-accent transition-colors"></span>
+                  {link.label}
                 </Link>
               ))}
             </nav>
