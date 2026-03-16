@@ -542,7 +542,7 @@ const Index = () => {
             {[
               { q: "How can I apply for admission?", a: "Visit our Admissions page or come directly to the school office. We accept applications for all grades K–10, subject to seat availability. Early applications are recommended as seats fill up quickly." },
               { q: "What are the school timings?", a: "Primary (K–5): 8:30 AM – 1:30 PM. Middle & High School (6–10): 8:30 AM – 4:00 PM, Monday to Saturday." },
-              { q: "What is Geniusphere?", a: "Geniusphere is Vignan's flagship finance & trading programme where students learn about stock markets, financial literacy, budgeting, and entrepreneurship through hands-on simulations. Available for Class 6 onwards." },
+              { q: "What is Geniusphere?", a: "Geniusphere is Vignan's flagship programme that teaches both finance and tech. Students learn about stock markets, financial literacy, coding, and entrepreneurship through hands-on simulations. Available for Class 6 onwards." },
               { q: "Does the school provide transport?", a: "Yes, school bus routes cover major areas around Laggere, Bengaluru. Contact the school office for route details and availability." },
               { q: "What is the medium of instruction?", a: "English is the primary medium. Kannada is taught as a compulsory second language from the primary level." },
               { q: "How do I contact the school?", a: "Visit us at Laggere, Bengaluru, or use the contact form on our Contact page. Office hours: Monday–Saturday, 8:30 AM – 4:30 PM." },

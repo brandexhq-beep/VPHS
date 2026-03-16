@@ -18,6 +18,11 @@ const programs = [
     description: "Rigorous academic preparation for board examinations with career guidance and life skills training.",
     highlights: ["Board exam prep", "Career counseling", "Advanced labs"],
   },
+  {
+    title: "Geniusphere",
+    description: "Our flagship enrichment program that teaches both finance and tech, introducing students to stock markets, financial literacy, and coding.",
+    highlights: ["Finance & trading", "Tech & coding", "Live simulations"],
+  },
 ];
 
 const subjects = [
@@ -35,7 +40,7 @@ const extracurricular = [
   {
     icon: TrendingUp,
     name: "Geniusphere",
-    description: "Our flagship finance & trading programme that introduces students to stock markets, financial literacy, budgeting, and entrepreneurial thinking through simulations, live market analysis, and guest sessions from industry professionals.",
+    description: "Our flagship programme that teaches both finance and tech. It introduces students to stock markets, financial literacy, budgeting, and entrepreneurial thinking alongside coding and tech skills through simulations and guest sessions.",
     color: "bg-emerald-50",
     iconColor: "text-emerald-600",
     badge: "Featured",
@@ -93,7 +98,7 @@ const faqs = [
   },
   {
     q: "What is Geniusphere and who can participate?",
-    a: "Geniusphere is Vignan's flagship finance & trading programme. It introduces students to stock markets, financial literacy, personal budgeting, mutual funds, and entrepreneurship through hands-on simulations and live market analysis sessions. Students from Class 6 onwards can participate, and Class 9–10 students can take part in inter-school trading competitions.",
+    a: "Geniusphere is Vignan's flagship programme that teaches both finance and tech. It introduces students to stock markets, financial literacy, coding, and entrepreneurship through hands-on simulations. Students from Class 6 onwards can participate.",
   },
   {
     q: "What are the school timings?",
@@ -135,7 +140,7 @@ const Academics = () => {
       {/* Programs */}
       <section className="container py-16 md:py-24">
         <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-8">Programs</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {programs.map((p, i) => (
             <motion.div
               key={p.title}
