@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, FlaskConical, Calculator, Code, Brain, Heart, Swords, Palette, ChevronRight, Lightbulb, ChevronDown } from "lucide-react";
+import { BookOpen, FlaskConical, Calculator, Code, Brain, Heart, Swords, Palette, ChevronRight, TrendingUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const programs = [
@@ -33,11 +33,11 @@ const subjects = [
 
 const extracurricular = [
   {
-    icon: Lightbulb,
+    icon: TrendingUp,
     name: "Geniusphere",
-    description: "A flagship enrichment programme that nurtures innovation, logical reasoning, and creative problem-solving through inter-school competitions, quizzes, and STEM challenges.",
-    color: "bg-yellow-50",
-    iconColor: "text-yellow-600",
+    description: "Our flagship finance & trading programme that introduces students to stock markets, financial literacy, budgeting, and entrepreneurial thinking through simulations, live market analysis, and guest sessions from industry professionals.",
+    color: "bg-emerald-50",
+    iconColor: "text-emerald-600",
     badge: "Featured",
   },
   {
@@ -93,7 +93,7 @@ const faqs = [
   },
   {
     q: "What is Geniusphere and who can participate?",
-    a: "Geniusphere is our flagship enrichment programme designed to challenge and inspire academically gifted students. It involves inter-school competitions, quizzes, and STEM projects. Students from Class 4 onwards are eligible to participate based on teacher recommendations.",
+    a: "Geniusphere is Vignan's flagship finance & trading programme. It introduces students to stock markets, financial literacy, personal budgeting, mutual funds, and entrepreneurship through hands-on simulations and live market analysis sessions. Students from Class 6 onwards can participate, and Class 9–10 students can take part in inter-school trading competitions.",
   },
   {
     q: "What are the school timings?",

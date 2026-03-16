@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar } from "lucide-react";
+import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -27,6 +27,7 @@ const facilities = [
   {
     category: "Skill Development",
     items: [
+      { icon: TrendingUp, name: "Geniusphere" },
       { icon: Code, name: "Code Club" },
       { icon: Calculator, name: "Abacus" },
     ],
@@ -80,10 +81,17 @@ const Index = () => {
 
             {/* Text side */}
             <motion.div variants={stagger} initial="initial" animate="animate">
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-primary/8 border border-primary/15 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                Est. 2004 · Bengaluru
-              </motion.div>
+              {/* School name */}
+              <motion.p
+                variants={fadeUp}
+                className="font-heading font-bold text-primary tracking-wide mb-1"
+                style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
+              >
+                Vignan Public High School
+              </motion.p>
+              <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6">
+                Est. 2004 &bull; Laggere, Bengaluru
+              </motion.p>
 
               <motion.h1
                 variants={fadeUp}
