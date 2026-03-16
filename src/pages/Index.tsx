@@ -58,7 +58,7 @@ const Index = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentHero((prev) => (prev + 1) % heroImages.length);
-    }, 6000);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
 
@@ -71,66 +71,62 @@ const Index = () => {
   return (
     <div className="bg-background text-foreground">
       {/* Hero — Split Screen */}
-      <section ref={heroRef} className="relative bg-background overflow-hidden min-h-screen flex flex-col md:flex-row">
+      <section ref={heroRef} className="relative bg-background overflow-hidden flex flex-col md:flex-row" style={{ minHeight: '100svh' }}>
 
         {/* Left text panel */}
-        <motion.div
-          className="relative z-10 w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-20 md:py-0 min-h-[55vh] md:min-h-screen"
-          style={{ opacity: heroOpacity }}
-        >
+        <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-20 py-28 md:py-16">
           {/* Subtle background dot grid */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #7A0032 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
           <motion.div variants={stagger} initial="initial" animate="animate" className="relative">
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-              <img src={logo} alt="Logo" className="w-10 h-10 rounded-full shadow-md" />
+              <img src={logo} alt="Logo" className="w-9 h-9 rounded-full shadow-md" />
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary/60">Vignan Public High School</span>
             </motion.div>
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading font-black leading-[0.95] tracking-tighter text-foreground mb-6"
-              style={{ fontSize: 'clamp(3rem, 7vw, 6rem)' }}
+              className="font-heading font-black leading-[0.95] tracking-tighter text-foreground mb-5"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
             >
               Shaping<br/>
               <span className="text-primary">Tomorrow's</span><br/>
               Leaders
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-muted-foreground font-body text-lg mb-10 max-w-md leading-relaxed">
-              Two decades of nurturing curious minds. A community built on knowledge, values, and the unbreakable belief that every child can shine.
+            <motion.p variants={fadeUp} className="text-muted-foreground font-body text-base md:text-lg mb-8 max-w-md leading-relaxed">
+              Two decades of nurturing curious minds. A community built on knowledge, values, and the belief that every child can shine.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               <Link
                 to="/admissions"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 group"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 group text-sm md:text-base"
               >
-                Enrol Now <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                Enrol Now <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-primary/20 text-foreground font-semibold rounded-2xl hover:border-primary hover:text-primary transition-all duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-primary/20 text-foreground font-semibold rounded-2xl hover:border-primary hover:text-primary transition-all duration-300 text-sm md:text-base"
               >
                 Learn More
               </Link>
             </motion.div>
 
             {/* Inline stats strip */}
-            <motion.div variants={fadeUp} className="flex items-center gap-8 mt-12 pt-10 border-t border-primary/10">
+            <motion.div variants={fadeUp} className="flex items-center gap-6 sm:gap-8 mt-10 pt-8 border-t border-primary/10">
               {[{ n: '20+', l: 'Years' }, { n: '1500+', l: 'Students' }, { n: '95%', l: 'Pass Rate' }].map(s => (
                 <div key={s.l}>
-                  <p className="text-2xl font-black text-primary">{s.n}</p>
+                  <p className="text-xl sm:text-2xl font-black text-primary">{s.n}</p>
                   <p className="text-xs text-muted-foreground font-medium">{s.l}</p>
                 </div>
               ))}
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Right image panel */}
-        <div className="relative w-full md:w-1/2 min-h-[45vh] md:min-h-screen overflow-hidden">
-          {/* Diagonal clip for visual interest */}
+        <div className="relative w-full md:w-1/2 min-h-[50vw] md:min-h-0 overflow-hidden">
           <div className="absolute inset-0">
             <AnimatePresence mode="popLayout">
               <motion.img
@@ -138,17 +134,18 @@ const Index = () => {
                 src={heroImages[currentHero]}
                 alt="School Campus"
                 className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0, scale: 1.08 }}
+                initial={{ opacity: 0, scale: 1.06 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1.5, ease: 'easeInOut' }}
+                transition={{ duration: 1.2, ease: 'easeInOut' }}
               />
             </AnimatePresence>
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent md:via-background/10" />
+            {/* Gradient blending on larger screens */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent md:from-background/30 md:via-transparent" />
           </div>
 
           {/* Slideshow dots */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             {heroImages.map((_, idx) => (
               <button
                 key={idx}
@@ -162,23 +159,23 @@ const Index = () => {
 
           {/* Floating badge */}
           <motion.div
-            className="absolute top-8 right-8 bg-background/90 backdrop-blur-md rounded-2xl px-5 py-4 shadow-xl border border-primary/10"
+            className="absolute top-6 right-6 bg-background/90 backdrop-blur-md rounded-2xl px-4 py-3 shadow-xl border border-primary/10"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
           >
             <p className="text-xs font-bold text-primary uppercase tracking-wider">Admissions 2025–26</p>
-            <p className="text-sm text-foreground/70 mt-0.5">Seats filling fast!</p>
+            <p className="text-xs text-foreground/60 mt-0.5">Seats filling fast!</p>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — desktop only */}
         <motion.div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1"
+          className="absolute bottom-5 left-[25%] -translate-x-1/2 hidden md:flex flex-col items-center gap-1 z-20"
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <div className="w-5 h-9 border-2 border-primary/25 rounded-full flex justify-center pt-1.5">
+          <div className="w-5 h-8 border-2 border-primary/25 rounded-full flex justify-center pt-1.5">
             <div className="w-1 h-1.5 bg-primary/40 rounded-full" />
           </div>
         </motion.div>
@@ -427,13 +424,13 @@ const Index = () => {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
-                <div className="p-6 flex-1 flex flex-col relative bg-background">
+                <div className="p-5 sm:p-6 flex-1 flex flex-col relative bg-background">
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{event.title}</h3>
-                  <p className="text-sm text-foreground/70 leading-relaxed mb-6">{event.description}</p>
-                  <div className="mt-auto flex items-center gap-2 text-xs font-bold text-secondary uppercase tracking-wider">
-                    <Calendar size={14} className="text-accent" />
-                    {event.date}
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{event.title}</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed mb-4">{event.description}</p>
+                  <div className="mt-auto flex items-center gap-2 text-xs font-bold text-primary/70 uppercase tracking-wider pt-3 border-t border-primary/10">
+                    <Calendar size={13} className="text-primary shrink-0" />
+                    <span>{event.date}</span>
                   </div>
                 </div>
               </motion.div>
