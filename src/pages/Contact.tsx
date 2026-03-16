@@ -54,7 +54,7 @@ const Contact = () => {
 
   return (
     <div>
-      <section className="bg-muted py-16 md:py-24 relative overflow-hidden">
+      <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
         <motion.div className="absolute -top-20 -left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
         <div className="container max-w-3xl relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

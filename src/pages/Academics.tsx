@@ -36,7 +36,7 @@ const Academics = () => {
 
   return (
     <div>
-      <section className="bg-muted py-16 md:py-24 relative overflow-hidden">
+      <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
         <motion.div className="absolute -bottom-20 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
         <div className="container max-w-3xl relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -90,21 +90,21 @@ const Academics = () => {
       <section className="bg-muted py-16 md:py-24">
         <div className="container">
           <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-8">Subjects & Activities</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {subjects.map((s, i) => (
               <motion.div
                 key={s.name}
-                className="bg-background rounded-xl p-5 shadow-elegant flex items-center gap-3 group hover:shadow-lg transition-all duration-300 cursor-default"
+                className="bg-background rounded-xl p-4 shadow-elegant flex items-center gap-4 group hover:shadow-lg transition-all duration-300 cursor-default min-h-[64px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
                 whileHover={{ y: -4 }}
               >
-                <div className={`p-2 rounded-lg ${s.color} group-hover:scale-110 transition-transform`}>
-                  <s.icon size={20} className="text-primary" />
+                <div className={`shrink-0 p-2.5 rounded-lg ${s.color} group-hover:scale-110 transition-transform`}>
+                  <s.icon size={22} className="text-primary" />
                 </div>
-                <span className="text-sm font-medium text-foreground/80">{s.name}</span>
+                <span className="text-sm font-semibold text-foreground/80 leading-snug">{s.name}</span>
               </motion.div>
             ))}
           </div>
