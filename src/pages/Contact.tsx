@@ -74,17 +74,17 @@ const Contact = () => {
               {contactInfo.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  className="flex gap-4 group"
+                  className="flex items-start gap-4 group"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className="p-2.5 rounded-xl bg-primary/10 shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
-                    <item.icon size={18} className="text-primary" />
+                  <div className="p-3 rounded-2xl bg-primary/10 shrink-0 mt-1 group-hover:bg-primary/20 transition-colors flex items-center justify-center">
+                    <item.icon size={20} className="text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-semibold text-primary mb-1">{item.title}</h3>
+                    <h3 className="font-heading font-bold text-primary mb-1">{item.title}</h3>
                     {item.content}
                   </div>
                 </motion.div>

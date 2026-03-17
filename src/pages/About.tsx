@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Target, Eye, Sparkles, History } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
-const values = ["Academic Excellence", "Integrity & Ethics", "Respect & Inclusivity", "Innovation & Creativity", "Community Service", "Physical Fitness"];
+const values = ["Academic Excellence", "Integrity & Ethics", "Respect & Inclusivity", "Innovation & Creativity", "Excellence in Sports"];
 
 const About = () => {
   return (
@@ -72,19 +72,18 @@ const About = () => {
               </div>
               <h2 className="text-2xl font-heading font-bold text-primary">Our Values</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="flex flex-wrap gap-3">
               {values.map((v, i) => (
                 <motion.div
                   key={v}
-                  className="bg-secondary rounded-xl p-5 shadow-elegant group hover:shadow-lg transition-all duration-300 cursor-default relative overflow-hidden"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className="bg-primary/5 border border-primary/10 rounded-full px-5 py-2.5 hover:bg-primary/10 transition-colors cursor-default hover:border-primary/30"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  whileHover={{ y: -4 }}
+                  transition={{ delay: i * 0.06 }}
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  <p className="font-medium text-secondary-foreground text-sm">{v}</p>
+                  <p className="font-medium text-foreground/80 text-sm whitespace-nowrap">{v}</p>
                 </motion.div>
               ))}
             </div>
