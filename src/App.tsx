@@ -28,6 +28,24 @@ const ScrollToTop = () => {
   return null;
 };
 
+const RootLayout = () => {
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/academics" element={<Academics />} />
+        <Route path="/faculty" element={<Faculty />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/admissions" element={<Admissions />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -40,21 +58,7 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           
           {/* Public Routes - With Layout */}
-          <Route path="/*" element={
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/academics" element={<Academics />} />
-                <Route path="/faculty" element={<Faculty />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/admissions" element={<Admissions />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Layout>
-          } />
+          <Route path="/*" element={<RootLayout />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
