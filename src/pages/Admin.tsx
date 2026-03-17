@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Users, Image as ImageIcon, MessageSquare, FileText, 
-  Settings, LogOut, Search, Plus, Trash2, Edit 
+  Settings, LogOut, Search, Plus, Trash2, Edit, FolderHeart
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useDataStore } from "@/store/dataStore";
@@ -242,21 +242,60 @@ export default function Admin() {
 
               {activeTab === 'gallery' && (
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row gap-4">
-                    <h1 className="text-3xl font-heading font-bold text-foreground">Manage Gallery</h1>
+                  {/* FOLDERS SECTION */}
+                  <div className="bg-card p-6 rounded-2xl border border-primary/10 shadow-sm space-y-4">
+                    <div className="flex justify-between items-center flex-col sm:flex-row gap-4 mb-4">
+                      <h2 className="text-xl font-heading font-bold text-foreground">Photo Albums / Folders</h2>
+                      <form 
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          const fd = new FormData(e.currentTarget);
+                          store.addGalleryFolder(fd.get('title') as string);
+                          e.currentTarget.reset();
+                          toast({ title: 'Folder Created' });
+                        }}
+                        className="flex gap-2 w-full sm:w-auto flex-wrap"
+                      >
+                        <input required name="title" type="text" placeholder="Folder Name (e.g. Sports Day)" className="border border-primary/10 bg-background px-3 py-2 rounded-lg text-sm flex-1 sm:w-48 outline-none focus:ring-2 focus:ring-primary/20" />
+                        <button className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex gap-2 items-center"><Plus size={16}/> Create Folder</button>
+                      </form>
+                    </div>
+                    {store.galleryFolders.length === 0 && <p className="text-muted-foreground text-sm">No folders created yet.</p>}
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                      {store.galleryFolders.map(folder => (
+                        <div key={folder.id} className="bg-background rounded-xl p-4 border border-primary/10 flex flex-col items-center justify-center text-center relative group">
+                           <FolderHeart className="text-primary/40 mb-2 group-hover:text-primary transition-colors" size={32} />
+                           <p className="text-xs font-bold leading-tight line-clamp-2">{folder.title}</p>
+                           <button onClick={() => { if(confirm('Delete folder and all its photos?')) store.deleteGalleryFolder(folder.id); }} className="absolute -top-2 -right-2 bg-red-500 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 shadow-sm hover:bg-red-600"><Trash2 size={12}/></button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* PHOTOS SECTION */}
+                  <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row gap-4 mt-8">
+                    <h2 className="text-3xl font-heading font-bold text-foreground">Manage Photos</h2>
                     <form 
                       onSubmit={(e) => {
                         e.preventDefault();
                         const fd = new FormData(e.currentTarget);
-                        store.addGalleryPhoto({ title: fd.get('title') as string, url: fd.get('url') as string });
+                        store.addGalleryPhoto({ 
+                           title: fd.get('title') as string, 
+                           url: fd.get('url') as string,
+                           folderId: fd.get('folderId') as string || undefined
+                        });
                         e.currentTarget.reset();
                         toast({ title: 'Photo added' });
                       }}
-                      className="flex gap-2 w-full sm:w-auto flex-wrap"
+                      className="flex gap-2 w-full lg:w-auto flex-col lg:flex-row bg-card p-3 rounded-xl border border-primary/10 shadow-sm"
                     >
-                      <input required name="title" type="text" placeholder="Title" className="border px-3 py-2 rounded-lg text-sm flex-1 sm:w-32" />
-                      <input required name="url" type="url" placeholder="Image URL" className="border px-3 py-2 rounded-lg text-sm flex-1 sm:w-48" />
-                      <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold flex gap-2 items-center"><Plus size={16}/> Add Photo</button>
+                      <input required name="title" type="text" placeholder="Image Caption" className="border px-3 py-2 border-primary/10 bg-background rounded-lg text-sm flex-1" />
+                      <input required name="url" type="url" placeholder="Image URL Limit" className="border px-3 py-2 border-primary/10 bg-background rounded-lg text-sm flex-1" />
+                      <select name="folderId" className="border px-3 py-2 border-primary/10 bg-background rounded-lg text-sm flex-1 text-foreground/80 outline-none">
+                        <option value="">No Folder (Other Photos)</option>
+                        {store.galleryFolders.map(f => <option key={f.id} value={f.id}>{f.title}</option>)}
+                      </select>
+                      <button className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex gap-2 items-center justify-center shrink-0"><Plus size={16}/> Add Photo</button>
                     </form>
                   </div>
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -264,7 +303,10 @@ export default function Admin() {
                     {store.gallery.map((img) => (
                       <div key={img.id} className="aspect-square bg-muted rounded-xl relative group overflow-hidden border border-primary/10 shadow-sm">
                         <img src={img.url} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                        <div className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">{img.title}</div>
+                        <div className="absolute top-2 left-2 right-2 flex flex-col gap-1">
+                          <div className="bg-black/60 text-white text-[10px] px-2 py-1 rounded w-fit">{img.title}</div>
+                          {img.folderId && <div className="bg-primary/80 text-white text-[10px] px-2 py-1 rounded w-fit flex items-center gap-1"><FolderHeart size={10}/> {store.galleryFolders.find(f => f.id === img.folderId)?.title}</div>}
+                        </div>
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                            <button onClick={() => { if(confirm('Delete photo?')) store.deleteGalleryPhoto(img.id); }} className="w-10 h-10 bg-white/20 hover:bg-red-500 rounded-full flex items-center justify-center text-white backdrop-blur-md transition-colors shadow-lg"><Trash2 size={16}/></button>
                         </div>

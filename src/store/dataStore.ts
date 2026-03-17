@@ -21,6 +21,11 @@ export interface Enquiry {
   read: boolean;
 }
 
+export interface GalleryFolder {
+  id: string;
+  title: string;
+}
+
 export interface GalleryPhoto {
   id: string;
   url: string;
@@ -53,6 +58,10 @@ interface DataStore {
   addEnquiry: (req: Omit<Enquiry, 'id' | 'date' | 'read'>) => void;
   markEnquiryRead: (id: string) => void;
   deleteEnquiry: (id: string) => void;
+
+  galleryFolders: GalleryFolder[];
+  addGalleryFolder: (title: string) => void;
+  deleteGalleryFolder: (id: string) => void;
 
   gallery: GalleryPhoto[];
   addGalleryPhoto: (photo: Omit<GalleryPhoto, 'id'>) => void;
@@ -109,10 +118,22 @@ export const useDataStore = create<DataStore>()(
         enquiries: state.enquiries.filter(e => e.id !== id)
       })),
 
+      galleryFolders: [
+        { id: "folder-1", title: "Annual Day 2025" },
+        { id: "folder-2", title: "Sports Day" }
+      ],
+      addGalleryFolder: (title) => set((state) => ({
+        galleryFolders: [{ id: crypto.randomUUID(), title }, ...state.galleryFolders]
+      })),
+      deleteGalleryFolder: (id) => set((state) => ({
+        galleryFolders: state.galleryFolders.filter(f => f.id !== id),
+        gallery: state.gallery.filter(g => g.folderId !== id) // Cascade delete
+      })),
+
       gallery: [
-        { id: crypto.randomUUID(), title: "Annual Day 2025", url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800" },
+        { id: crypto.randomUUID(), title: "Dance Performance", url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800", folderId: "folder-1" },
         { id: crypto.randomUUID(), title: "Science Exhibition", url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800" },
-        { id: crypto.randomUUID(), title: "Sports Day", url: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800" },
+        { id: crypto.randomUUID(), title: "100m Dash", url: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800", folderId: "folder-2" },
         { id: crypto.randomUUID(), title: "Campus Ground", url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800" }
       ],
       addGalleryPhoto: (photo) => set((state) => ({
@@ -147,7 +168,7 @@ export const useDataStore = create<DataStore>()(
       })),
     }),
     {
-      name: 'vphs-data-store-v2', // Changed version to clear out old empty states
+      name: 'vphs-data-store-v3', // Changed version to clear out old empty states
     }
   )
 );

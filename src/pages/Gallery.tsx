@@ -1,9 +1,16 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderHeart, Image as ImageIcon } from "lucide-react";
+import { FolderHeart, Image as ImageIcon, ArrowLeft } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
 
 const Gallery = () => {
   const store = useDataStore();
+  const [activeFolder, setActiveFolder] = useState<string | null>(null);
+
+  // Group photos into folders
+  const currentPhotos = activeFolder 
+    ? store.gallery.filter(p => p.folderId === activeFolder)
+    : store.gallery.filter(p => !p.folderId);
 
   return (
     <div>
@@ -20,10 +27,61 @@ const Gallery = () => {
       </section>
 
       <section className="container py-16 md:py-24 min-h-[400px]">
-        {store.gallery.length === 0 ? (
+        {activeFolder ? (
+          <div className="mb-10 flex items-center gap-4">
+             <button 
+               onClick={() => setActiveFolder(null)}
+               className="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary/10 flex items-center justify-center text-primary transition-colors"
+             >
+               <ArrowLeft size={18} />
+             </button>
+             <h2 className="text-3xl font-heading font-bold text-foreground">
+               {store.galleryFolders.find(f => f.id === activeFolder)?.title}
+             </h2>
+          </div>
+        ) : (
+          <>
+            {store.galleryFolders.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-heading font-bold mb-6 text-foreground">Albums</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {store.galleryFolders.map(folder => {
+                    const photos = store.gallery.filter(p => p.folderId === folder.id);
+                    const coverPhoto = photos.length > 0 ? photos[0].url : null;
+                    
+                    return (
+                      <motion.div 
+                        key={folder.id}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="group cursor-pointer"
+                        onClick={() => setActiveFolder(folder.id)}
+                      >
+                         <div className="aspect-[4/3] rounded-2xl bg-primary/5 border border-primary/10 overflow-hidden relative shadow-sm hover:shadow-lg transition-all mb-3 flex items-center justify-center">
+                           {coverPhoto ? (
+                             <img src={coverPhoto} alt="Folder Cover" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                           ) : (
+                             <FolderHeart className="text-primary/30" size={48} />
+                           )}
+                           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                         </div>
+                         <h3 className="font-heading font-bold text-lg text-foreground group-hover:text-primary transition-colors">{folder.title}</h3>
+                         <p className="text-xs text-muted-foreground font-medium">{photos.length} Photos</p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            
+            {currentPhotos.length > 0 && <h2 className="text-2xl font-heading font-bold mb-6 text-foreground">Other Photos</h2>}
+          </>
+        )}
+
+        {currentPhotos.length === 0 ? (
           <div className="text-center py-24 bg-card rounded-3xl border border-primary/5 shadow-sm">
             <div className="w-20 h-20 bg-primary/5 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
-              <ImageIcon size={32} />
+              {activeFolder ? <ImageIcon size={32} /> : <FolderHeart size={32}/>}
             </div>
             <h3 className="font-heading font-bold text-2xl text-primary mb-3">No Photos Yet</h3>
             <p className="text-muted-foreground max-w-sm mx-auto">Check back later for photos of our school events and activities.</p>
@@ -31,7 +89,7 @@ const Gallery = () => {
         ) : (
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
             <AnimatePresence>
-              {store.gallery.map((photo, i) => (
+              {currentPhotos.map((photo, i) => (
                 <motion.div
                   key={photo.id}
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
