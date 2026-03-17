@@ -70,7 +70,11 @@ interface DataStore {
 export const useDataStore = create<DataStore>()(
   persist(
     (set) => ({
-      admissions: [],
+      admissions: [
+        { id: crypto.randomUUID(), date: "3/15/2026", studentName: "Rahul Sharma", grade: "Class 6", parentName: "Ramesh S", contact: "9988776655", status: "Pending" },
+        { id: crypto.randomUUID(), date: "3/16/2026", studentName: "Sneha P", grade: "LKG", parentName: "Priya P", contact: "8899001122", status: "Reviewed" },
+        { id: crypto.randomUUID(), date: "3/17/2026", studentName: "Ananya V", grade: "UKG", parentName: "Vikram V", contact: "9900887766", status: "Admitted" }
+      ],
       addAdmission: (req) => set((state) => ({
         admissions: [{
           ...req,
@@ -86,7 +90,10 @@ export const useDataStore = create<DataStore>()(
         admissions: state.admissions.filter(a => a.id !== id)
       })),
 
-      enquiries: [],
+      enquiries: [
+        { id: crypto.randomUUID(), name: "John Doe", email: "john@example.com", message: "When do the admissions for LKG start?", date: "3/16/2026", phone: "9876543210", read: false },
+        { id: crypto.randomUUID(), name: "Sita R", email: "sita@gmail.com", message: "I wanted to inquire about the school bus routes for Chamundi Nagar.", date: "3/17/2026", read: true }
+      ],
       addEnquiry: (req) => set((state) => ({
         enquiries: [{
           ...req,
@@ -102,7 +109,12 @@ export const useDataStore = create<DataStore>()(
         enquiries: state.enquiries.filter(e => e.id !== id)
       })),
 
-      gallery: [], // flushed dummy data
+      gallery: [
+        { id: crypto.randomUUID(), title: "Annual Day 2025", url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800" },
+        { id: crypto.randomUUID(), title: "Science Exhibition", url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800" },
+        { id: crypto.randomUUID(), title: "Sports Day", url: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800" },
+        { id: crypto.randomUUID(), title: "Campus Ground", url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800" }
+      ],
       addGalleryPhoto: (photo) => set((state) => ({
         gallery: [{ ...photo, id: crypto.randomUUID() }, ...state.gallery]
       })),
@@ -110,7 +122,11 @@ export const useDataStore = create<DataStore>()(
         gallery: state.gallery.filter(g => g.id !== id)
       })),
 
-      faculty: [], // flushed dummy data
+      faculty: [
+        { id: crypto.randomUUID(), name: "Amar Narayan", department: "Administration", role: "Principal", experience: "20+ Years" },
+        { id: crypto.randomUUID(), name: "Dr. Suresh K", department: "Sciences", role: "HOD Science", experience: "15 Years" },
+        { id: crypto.randomUUID(), name: "Meera Reddy", department: "Mathematics", role: "Senior Teacher", experience: "12 Years" }
+      ],
       addFaculty: (faculty) => set((state) => ({
         faculty: [{ ...faculty, id: crypto.randomUUID() }, ...state.faculty]
       })),
@@ -118,7 +134,11 @@ export const useDataStore = create<DataStore>()(
         faculty: state.faculty.filter(f => f.id !== id)
       })),
 
-      testimonials: [], // flushed dummy data
+      testimonials: [
+        { id: crypto.randomUUID(), name: "Suresh P.", role: "Parent (Class 8)", text: "The Geniusphere program has transformed how my son looks at math and finance. Highly recommended!" },
+        { id: crypto.randomUUID(), name: "Kavitha M.", role: "Parent (Class 5)", text: "Vignan provides a perfectly balanced curriculum. The faculty is very approachable and caring." },
+        { id: crypto.randomUUID(), name: "Rahul S.", role: "Alumnus", text: "My years at Vignan gave me the foundation I needed for my engineering career." }
+      ],
       addTestimonial: (test) => set((state) => ({
         testimonials: [{ ...test, id: crypto.randomUUID() }, ...state.testimonials]
       })),
@@ -127,7 +147,7 @@ export const useDataStore = create<DataStore>()(
       })),
     }),
     {
-      name: 'vphs-data-store',
+      name: 'vphs-data-store-v2', // Changed version to clear out old empty states
     }
   )
 );
