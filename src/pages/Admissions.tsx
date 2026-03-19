@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, CheckCircle, ClipboardList, Phone, GraduationCap } from "lucide-react";
+import { ArrowRight, FileText, CheckCircle, ClipboardList, Phone, GraduationCap, PenTool } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
 import { toast } from "@/hooks/use-toast";
 
@@ -49,134 +49,157 @@ const Admissions = () => {
   };
 
   return (
-    <div>
-      <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
-        <motion.div className="absolute -top-20 right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-        <div className="container max-w-3xl relative">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-accent bg-accent/10 px-3 py-1 rounded-full mb-4">
+    <div className="bg-background min-h-screen">
+      {/* Premium Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-primary isolate">
+        {/* Animated Mesh Gradient Background Elements */}
+        <div className="absolute inset-0 z-[-1] opacity-40">
+          <motion.div
+            className="absolute top-[-30%] left-[-10%] w-[60%] h-[160%] bg-accent rounded-full mix-blend-screen filter blur-[120px]"
+            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute top-[-20%] right-[-10%] w-[50%] h-[150%] bg-secondary rounded-full mix-blend-screen filter blur-[100px]"
+            animate={{ rotate: -360, scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-[0.15]" />
+
+        <div className="container relative z-10 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white backdrop-blur-md border border-white/20 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 shadow-xl">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              </span>
               2025-26 Admissions Open
-            </span>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary tracking-tight text-balance mb-6">Admissions</h1>
-            <p className="text-foreground/70 leading-relaxed text-pretty text-lg">
-              Join the Vignan family. We welcome students who are eager to learn and grow.
+            </div>
+            <h1 className="text-4xl md:text-6xl font-heading font-black text-white tracking-tight mb-6 drop-shadow-lg">
+              Begin Your Journey
+            </h1>
+            <p className="text-white/80 leading-relaxed text-lg md:text-xl font-medium drop-shadow-md">
+              Join the Vignan family. We welcome students who are eager to learn, explore, and shape a bright future together.
             </p>
           </motion.div>
         </div>
+        
+        {/* Decorative bottom gradient fade to bg-background */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
-      <section className="container py-16 md:py-24 max-w-3xl space-y-16">
+      <section className="container py-16 md:py-24 max-w-4xl space-y-20 relative">
+        <div className="absolute top-40 right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+        <div className="absolute bottom-40 left-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+
         {/* Process */}
-        <div>
-          <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="p-2.5 rounded-xl bg-primary/10">
-              <ClipboardList size={20} className="text-primary" />
+        <div className="bg-card rounded-[2rem] p-8 md:p-12 shadow-lg border border-primary/10 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <motion.div className="flex items-center gap-4 mb-10 relative z-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <ClipboardList size={28} className="text-primary" />
             </div>
-            <h2 className="text-2xl font-heading font-bold text-primary">Admission Process</h2>
+            <h2 className="text-3xl font-heading font-black text-foreground">Admission Process</h2>
           </motion.div>
-          <ol className="space-y-4 relative">
-            <div className="absolute left-[13px] top-4 bottom-4 w-px bg-primary/10" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
             {process.map((step, i) => (
-              <motion.li
+              <motion.div
                 key={i}
-                className="flex gap-4 items-start relative"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="bg-background rounded-2xl p-6 border border-primary/5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 relative group/step flex flex-col pt-10"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <span className="w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-medium flex items-center justify-center shrink-0 tabular-nums relative z-10">
-                  {i + 1}
-                </span>
-                <p className="text-foreground/70 text-sm leading-relaxed pt-1">{step}</p>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
-
-        {/* Documents */}
-        <div>
-          <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="p-2.5 rounded-xl bg-primary/10">
-              <FileText size={20} className="text-primary" />
-            </div>
-            <h2 className="text-2xl font-heading font-bold text-primary">Documents Required</h2>
-          </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {documents.map((doc, i) => (
-              <motion.div
-                key={doc}
-                className="flex items-center gap-3 text-foreground/70 text-sm bg-secondary rounded-xl p-4 group hover:shadow-elegant transition-all duration-300"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                whileHover={{ x: 4 }}
-              >
-                <CheckCircle size={16} className="text-accent shrink-0 group-hover:scale-110 transition-transform" />
-                {doc}
+                <div className="absolute top-0 right-6 translate-y-[-50%] w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg group-hover/step:scale-110 transition-transform">
+                  <span className="text-white font-black text-xl">{i + 1}</span>
+                </div>
+                <p className="text-foreground/80 font-medium text-sm leading-relaxed">{step}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Eligibility */}
-        <div>
-          <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="p-2.5 rounded-xl bg-primary/10">
-              <GraduationCap size={20} className="text-primary" />
+        {/* Documents & Eligibility Container */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+          {/* Documents */}
+          <div className="bg-card rounded-[2rem] p-8 shadow-lg border border-primary/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden isolate">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -z-10" />
+            <motion.div className="flex items-center gap-4 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                <FileText size={24} className="text-primary" />
+              </div>
+              <h2 className="text-2xl font-heading font-black text-foreground">Documents Required</h2>
+            </motion.div>
+            <ul className="space-y-4">
+              {documents.map((doc, i) => (
+                <motion.li
+                  key={doc}
+                  className="flex items-start gap-3 text-foreground/80 font-medium group bg-background p-4 rounded-2xl border border-primary/5 hover:border-primary/10 shadow-sm"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <CheckCircle size={20} className="text-emerald-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <span className="text-sm">{doc}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Eligibility */}
+          <div className="bg-card rounded-[2rem] p-8 shadow-lg border border-primary/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden isolate">
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -z-10" />
+            <motion.div className="flex items-center gap-4 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                <GraduationCap size={24} className="text-primary" />
+              </div>
+              <h2 className="text-2xl font-heading font-black text-foreground">Eligibility</h2>
+            </motion.div>
+            <div className="space-y-3">
+              {eligibility.map((e, i) => (
+                <motion.div
+                  key={e.grade}
+                  className="bg-background rounded-2xl p-4 border border-primary/5 shadow-sm hover:border-primary/10 transition-colors"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <p className="font-heading font-bold text-primary mb-1 text-sm md:text-base">{e.grade}</p>
+                  <p className="text-foreground/70 text-xs md:text-sm font-medium">{e.age}</p>
+                </motion.div>
+              ))}
             </div>
-            <h2 className="text-2xl font-heading font-bold text-primary">Eligibility</h2>
-          </motion.div>
-          <div className="bg-card rounded-xl overflow-hidden shadow-elegant border border-primary/5">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-primary/10 bg-primary/5">
-                  <th className="text-left p-4 font-heading font-semibold text-primary">Grade</th>
-                  <th className="text-left p-4 font-heading font-semibold text-primary">Age Requirement</th>
-                </tr>
-              </thead>
-              <tbody>
-                {eligibility.map((e, i) => (
-                  <motion.tr
-                    key={e.grade}
-                    className="border-b border-primary/5 last:border-0 hover:bg-primary/[0.02] transition-colors"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
-                  >
-                    <td className="p-4 text-foreground/80 font-medium">{e.grade}</td>
-                    <td className="p-4 text-foreground/60">{e.age}</td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
 
         {/* Admission Form Section */}
         <div>
-          <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="p-2.5 rounded-xl bg-primary/10">
-              <FileText size={20} className="text-primary" />
+          <motion.div className="flex items-center gap-4 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+              <PenTool size={28} className="text-primary" />
             </div>
-            <h2 className="text-2xl font-heading font-bold text-primary">Apply Online</h2>
+            <h2 className="text-3xl font-heading font-black text-foreground">Apply Online</h2>
           </motion.div>
-          <div className="bg-card rounded-2xl p-6 md:p-8 shadow-elegant border border-primary/5 relative overflow-hidden">
+
+          <div className="bg-card rounded-[2.5rem] p-8 md:p-12 shadow-2xl border border-primary/10 relative overflow-hidden isolate group">
              {/* Decorative Background Accent */}
-             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
-             <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
+             <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+             <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[100px] -z-10 group-hover:rotate-12 transition-transform duration-[2s]" />
              
-            <form className="space-y-6 relative z-10" onSubmit={handleApply}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form className="space-y-8 relative z-10" onSubmit={handleApply}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Student's Name</label>
-                  <input name="studentName" required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Rahul Sharma" />
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Student's Name</label>
+                  <input name="studentName" required type="text" className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm shadow-sm" placeholder="e.g. Rahul Sharma" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Grade Applied For</label>
-                  <select name="grade" required className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm text-foreground/90">
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Grade Applied For</label>
+                  <select name="grade" required className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm text-foreground/90 shadow-sm appearance-none cursor-pointer">
                     <option value="" disabled selected>Select Grade</option>
                     <option value="LKG">LKG</option>
                     <option value="UKG">UKG</option>
@@ -184,54 +207,62 @@ const Admissions = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Parent's Name</label>
-                  <input name="parentName" required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Ramesh Sharma" />
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Parent's Name</label>
+                  <input name="parentName" required type="text" className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm shadow-sm" placeholder="e.g. Ramesh Sharma" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Contact Number</label>
-                  <input name="contact" required type="tel" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="+91" />
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Contact Number</label>
+                  <input name="contact" required type="tel" className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm shadow-sm" placeholder="+91" />
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-semibold text-foreground/80">Prior School (if any)</label>
-                  <input name="priorSchool" type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="Previous school name" />
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Prior School (if any)</label>
+                  <input name="priorSchool" type="text" className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm shadow-sm" placeholder="Previous school name" />
                 </div>
                 <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-semibold text-foreground/80">Additional Notes / Queries</label>
-                  <textarea name="notes" rows={3} className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm resize-none" placeholder="Any special requirements or questions..."></textarea>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Additional Notes / Queries</label>
+                  <textarea name="notes" rows={4} className="w-full px-5 py-4 rounded-2xl border border-primary/10 bg-background/50 hover:bg-background focus:bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm resize-none shadow-sm" placeholder="Any special requirements or questions..."></textarea>
                 </div>
               </div>
-              <button type="submit" disabled={submitted} className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed">
-                {submitted ? "Submitted Successfully!" : "Submit Application"} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              <div className="flex justify-end">
+                <button type="submit" disabled={submitted} className="w-full md:w-auto px-10 py-4 bg-primary text-primary-foreground font-black tracking-wide rounded-2xl hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed">
+                  {submitted ? "Submitted Successfully!" : "Submit Application"} 
+                  {!submitted && <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform" />}
+                </button>
+              </div>
             </form>
           </div>
         </div>
 
         {/* Contact CTA */}
         <motion.div
-          className="bg-primary rounded-2xl p-8 md:p-10 text-center relative overflow-hidden"
+          className="bg-gradient-to-r from-primary to-accent relative rounded-[2rem] p-10 md:p-14 text-center overflow-hidden shadow-2xl border border-white/10 isolate"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
         >
+          {/* Subtle noise texture */}
+          <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay -z-10" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
+          
           <motion.div
-            className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-accent/10"
+            className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-white/10 blur-3xl -z-10"
             animate={{ scale: [1, 1.3, 1] }}
-            transition={{ repeat: Infinity, duration: 6 }}
+            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
           />
-          <div className="relative">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Phone size={18} className="text-primary-foreground" />
-              <h2 className="text-xl font-heading font-bold text-primary-foreground">Have Questions?</h2>
+          <div className="relative z-10">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="p-3 bg-white/10 backdrop-blur-md rounded-full shadow-inner border border-white/20">
+                <Phone size={24} className="text-white" />
+              </div>
             </div>
-            <p className="text-primary-foreground/70 text-sm mb-6">
-              Contact us at <a href="tel:+919972235286" className="underline font-medium">99722 35286</a> or visit our school.
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-white mb-4 drop-shadow-md">Have Questions?</h2>
+            <p className="text-white/90 text-lg md:text-xl font-medium mb-8 max-w-lg mx-auto drop-shadow-sm">
+              Contact us at <a href="tel:+919972235286" className="font-bold underline underline-offset-4 hover:text-secondary transition-colors">99722 35286</a> or visit our school campus.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-medium rounded-lg hover:bg-secondary/90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-sm group"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-white text-primary font-black rounded-2xl hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 text-lg group"
             >
-              Contact Us <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              Contact Us <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </motion.div>

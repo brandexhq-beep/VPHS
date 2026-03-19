@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, FlaskConical, Calculator, Code, Brain, Heart, Swords, Palette, ChevronRight, TrendingUp, ChevronDown } from "lucide-react";
+import { BookOpen, FlaskConical, Calculator, Code, Brain, Heart, Swords, Palette, ChevronRight, TrendingUp, ChevronDown, GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 const programs = [
@@ -41,15 +41,15 @@ const extracurricular = [
     icon: TrendingUp,
     name: "Geniusphere",
     description: "Our flagship programme that teaches both finance and tech. It introduces students to stock markets, financial literacy, budgeting, and entrepreneurial thinking alongside coding and tech skills through simulations and guest sessions.",
-    color: "bg-emerald-50",
-    iconColor: "text-emerald-600",
+    color: "bg-emerald-500/10",
+    iconColor: "text-emerald-500",
     badge: "Featured",
   },
   {
     icon: Code,
     name: "Code Club",
     description: "Students explore programming, build mini-projects, and develop computational thinking through fun challenges and hackathons.",
-    color: "bg-primary/5",
+    color: "bg-primary/10",
     iconColor: "text-primary",
     badge: null,
   },
@@ -65,7 +65,7 @@ const extracurricular = [
     icon: Swords,
     name: "Karate",
     description: "Discipline, self-defence, and physical fitness through structured karate training under certified instructors.",
-    color: "bg-primary/5",
+    color: "bg-primary/10",
     iconColor: "text-primary",
     badge: null,
   },
@@ -81,7 +81,7 @@ const extracurricular = [
     icon: Palette,
     name: "Arts & Crafts",
     description: "A creative outlet where students express themselves through drawing, painting, clay modelling, and craft projects.",
-    color: "bg-primary/5",
+    color: "bg-primary/10",
     iconColor: "text-primary",
     badge: null,
   },
@@ -123,79 +123,115 @@ const Academics = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
-        <motion.div className="absolute -bottom-20 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
-        <div className="container max-w-3xl relative">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary tracking-tight text-balance mb-6">Academics</h1>
-            <p className="text-foreground/70 leading-relaxed text-lg">
+    <div className="bg-background min-h-screen">
+      {/* Premium Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-primary isolate">
+        {/* Animated Mesh Gradient Background Elements */}
+        <div className="absolute inset-0 z-[-1] opacity-40">
+          <motion.div
+            className="absolute top-[-30%] left-[-10%] w-[60%] h-[160%] bg-accent rounded-full mix-blend-screen filter blur-[120px]"
+            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute top-[-20%] right-[-10%] w-[50%] h-[150%] bg-secondary rounded-full mix-blend-screen filter blur-[100px]"
+            animate={{ rotate: -360, scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2622&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-[0.15]" />
+
+        <div className="container relative z-10 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white backdrop-blur-md border border-white/20 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 shadow-xl">
+              <GraduationCap size={14} className="text-white" />
+              Excellence in Education
+            </div>
+            <h1 className="text-4xl md:text-6xl font-heading font-black text-white tracking-tight mb-6 drop-shadow-lg">
+              Academics
+            </h1>
+            <p className="text-white/80 leading-relaxed text-lg md:text-xl font-medium drop-shadow-md">
               Our curriculum is designed to nurture intellectual curiosity and build a strong academic foundation from Kindergarten through Class 10.
             </p>
           </motion.div>
         </div>
+        
+        {/* Decorative bottom gradient fade to bg-background */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Programs */}
-      <section className="container py-16 md:py-24">
-        <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-8">Programs</h2>
+      <section className="container py-16 md:py-24 relative">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground tracking-tight">Our Programs</h2>
+        </motion.div>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {programs.map((p, i) => (
             <motion.div
               key={p.title}
-              className="bg-secondary rounded-xl p-6 shadow-elegant cursor-pointer group relative overflow-hidden"
+              className="bg-card rounded-3xl p-6 md:p-8 shadow-lg hover:shadow-2xl border border-primary/10 cursor-pointer group relative overflow-hidden transition-all duration-500"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              whileHover={{ y: -6 }}
               onClick={() => setExpanded(expanded === i ? null : i)}
             >
-              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
-              <h3 className="font-heading font-semibold text-accent mb-3 relative">{p.title}</h3>
-              <p className="text-sm text-foreground/70 leading-relaxed mb-4 relative">{p.description}</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
+              
+              <h3 className="font-heading font-bold text-2xl text-foreground group-hover:text-primary transition-colors mb-4 relative z-10">{p.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4 relative z-10 font-medium">{p.description}</p>
+              
               <motion.div
                 initial={false}
                 animate={{ height: expanded === i ? "auto" : 0, opacity: expanded === i ? 1 : 0 }}
-                className="overflow-hidden"
+                className="overflow-hidden relative z-10"
               >
-                <ul className="space-y-2 pt-2 border-t border-primary/10">
+                <ul className="space-y-3 pt-4 border-t border-primary/10 mb-2">
                   {p.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-2 text-sm text-foreground/60">
-                      <ChevronRight size={14} className="text-accent" />
+                    <li key={h} className="flex items-start gap-2 text-sm text-foreground/80 font-medium tracking-tight">
+                      <ChevronRight size={16} className="text-primary shrink-0 mt-0.5" />
                       {h}
                     </li>
                   ))}
                 </ul>
               </motion.div>
-              <button className="text-xs text-accent font-medium mt-2 relative">
+              
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-primary relative z-10 group/btn">
                 {expanded === i ? "Show less" : "Show more"}
-              </button>
+                <ChevronDown size={14} className={`transition-transform duration-300 ${expanded === i ? 'rotate-180' : 'group-hover/btn:translate-y-0.5'}`} />
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Subjects */}
-      <section className="bg-muted py-16 md:py-24">
+      <section className="bg-primary/5 py-16 md:py-24 border-y border-primary/10 relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px] pointer-events-none -z-10" />
         <div className="container">
-          <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-8">Subjects</h2>
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground tracking-tight mb-4">Core Subjects</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">A well-rounded academic curriculum building strong fundamentals.</p>
+          </motion.div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {subjects.map((s, i) => (
               <motion.div
                 key={s.name}
-                className="bg-background rounded-xl p-4 shadow-elegant flex items-center gap-3 group hover:shadow-lg transition-all duration-300 cursor-default"
-                initial={{ opacity: 0, scale: 0.95 }}
+                className="bg-card rounded-2xl p-5 shadow-sm border border-primary/10 flex flex-col items-center text-center gap-4 group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default"
+                initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                whileHover={{ y: -3 }}
+                transition={{ delay: i * 0.05 }}
               >
-                <div className={`shrink-0 p-2.5 rounded-lg ${s.color} group-hover:scale-110 transition-transform`}>
-                  <s.icon size={20} className="text-primary" />
+                <div className={`shrink-0 p-4 rounded-full ${s.color} group-hover:scale-110 transition-transform duration-500`}>
+                  <s.icon size={28} className="text-primary drop-shadow-sm" />
                 </div>
-                <span className="text-sm font-semibold text-foreground/80">{s.name}</span>
+                <span className="text-sm md:text-base font-bold text-foreground group-hover:text-primary transition-colors">{s.name}</span>
               </motion.div>
             ))}
           </div>
@@ -203,73 +239,77 @@ const Academics = () => {
       </section>
 
       {/* Extracurricular Activities */}
-      <section className="container py-16 md:py-24">
-        <div className="mb-10">
-          <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-2">Extracurricular Activities</h2>
-          <p className="text-muted-foreground">Beyond books — enriching every student's journey</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section className="container py-16 md:py-24 relative">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center md:text-left">
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground tracking-tight mb-3">Extracurricular Activities</h2>
+          <p className="text-muted-foreground text-lg">Beyond books — enriching every student's journey</p>
+        </motion.div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {extracurricular.map((item, i) => (
             <motion.div
               key={item.name}
-              className="bg-background rounded-2xl p-6 border border-primary/5 hover:border-primary/20 shadow-sm hover:shadow-md transition-all duration-300 group relative overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
+              className="bg-card rounded-[2rem] p-8 border border-primary/10 shadow-lg hover:shadow-2xl transition-all duration-500 group relative overflow-hidden isolate"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -4 }}
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+              
               {item.badge && (
-                <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full">
+                <span className="absolute top-6 right-6 text-[10px] font-black uppercase tracking-widest bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-3 py-1.5 rounded-full shadow-sm">
                   {item.badge}
                 </span>
               )}
-              <div className={`w-10 h-10 rounded-xl ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                <item.icon size={20} className={item.iconColor} />
+              
+              <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 shadow-inner`}>
+                <item.icon size={24} className={item.iconColor} />
               </div>
-              <h3 className="font-heading font-bold text-foreground text-lg mb-2">{item.name}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              
+              <h3 className="font-heading font-bold text-foreground text-2xl mb-3 group-hover:text-primary transition-colors">{item.name}</h3>
+              <p className="text-base text-muted-foreground leading-relaxed font-medium">{item.description}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-muted py-16 md:py-24">
-        <div className="container max-w-3xl">
+      <section className="bg-primary/5 py-16 md:py-24 border-t border-primary/10">
+        <div className="container max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-10"
+            className="mb-12 text-center"
           >
-            <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary tracking-tight mb-2">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground">Everything you need to know about academics at Vignan</p>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground tracking-tight mb-4">Frequently Asked Questions</h2>
+            <p className="text-muted-foreground text-lg">Everything you need to know about academics at Vignan</p>
           </motion.div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {faqs.map((faq, i) => (
               <motion.div
                 key={i}
-                className="bg-background rounded-2xl border border-primary/5 overflow-hidden"
+                className="bg-card rounded-[1.5rem] border border-primary/10 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
               >
                 <button
-                  className="w-full flex items-center justify-between gap-4 p-5 text-left group"
+                  className="w-full flex items-center justify-between gap-4 p-6 text-left group"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  <span className="font-semibold text-foreground text-sm md:text-base leading-snug group-hover:text-primary transition-colors">
+                  <span className="font-bold text-foreground text-lg leading-snug group-hover:text-primary transition-colors">
                     {faq.q}
                   </span>
                   <motion.div
                     animate={{ rotate: openFaq === i ? 180 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center"
+                    transition={{ duration: 0.3, ease: "backOut" }}
+                    className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${openFaq === i ? 'bg-primary text-white shadow-md' : 'bg-primary/10 text-primary group-hover:bg-primary/20'}`}
                   >
-                    <ChevronDown size={15} className="text-primary" />
+                    <ChevronDown size={20} />
                   </motion.div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -279,12 +319,14 @@ const Academics = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-primary/5 pt-4">
-                        {faq.a}
-                      </p>
+                      <div className="px-6 pb-6 pt-2 border-t border-primary/5 mt-2">
+                        <p className="text-base text-muted-foreground leading-relaxed font-medium">
+                          {faq.a}
+                        </p>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

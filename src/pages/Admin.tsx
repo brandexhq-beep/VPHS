@@ -34,22 +34,36 @@ export default function Admin() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden isolate">
+        {/* Animated Mesh Gradient Background Elements */}
+        <div className="absolute inset-0 z-[-1] opacity-40">
+          <motion.div
+            className="absolute top-[-30%] left-[-10%] w-[60%] h-[160%] bg-accent rounded-full mix-blend-screen filter blur-[120px]"
+            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute top-[-20%] right-[-10%] w-[50%] h-[150%] bg-secondary rounded-full mix-blend-screen filter blur-[100px]"
+            animate={{ rotate: -360, scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          />
+        </div>
+
         <motion.div 
-          className="bg-card w-full max-w-md p-8 rounded-3xl shadow-2xl border border-primary/5 relative overflow-hidden"
+          className="bg-card/80 backdrop-blur-xl w-full max-w-md p-10 rounded-[2.5rem] shadow-2xl border border-white/20 relative overflow-hidden group"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
         >
-          <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors duration-700" />
+          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors duration-700" />
           
           <div className="relative z-10">
-            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
-              <Settings className="text-primary-foreground" size={32} />
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-primary/20">
+              <Settings className="text-white" size={32} />
             </div>
-            <h1 className="text-3xl font-heading font-bold text-foreground mb-2">Admin Portal</h1>
-            <p className="text-muted-foreground text-sm mb-8">Sign in to manage Vignan Public High School.</p>
+            <h1 className="text-3xl font-heading font-black text-foreground mb-3">Admin Portal</h1>
+            <p className="text-muted-foreground font-medium mb-10 text-sm">Sign in to manage Vignan Public High School.</p>
             
-            <form onSubmit={handleLogin} className="space-y-5">
+            <form onSubmit={handleLogin} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground ml-1">Username</label>
                 <input 
@@ -58,7 +72,7 @@ export default function Admin() {
                   required
                   value={username}
                   onChange={e => setUsername(e.target.value)}
-                  className="w-full px-5 py-3.5 bg-background border border-primary/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium" 
+                  className="w-full px-5 py-4 bg-background/50 hover:bg-background border border-primary/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-background transition-all font-medium text-sm shadow-sm" 
                   placeholder="Enter username" 
                 />
               </div>
@@ -69,13 +83,13 @@ export default function Admin() {
                   required
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  className="w-full px-5 py-3.5 bg-background border border-primary/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium" 
+                  className="w-full px-5 py-4 bg-background/50 hover:bg-background border border-primary/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-background transition-all font-medium text-sm shadow-sm" 
                   placeholder="Enter password" 
                 />
               </div>
               <button 
                 type="submit" 
-                className="w-full py-3.5 bg-primary text-primary-foreground font-bold rounded-xl mt-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 active:scale-95"
+                className="w-full py-4 bg-primary text-primary-foreground font-black tracking-wide rounded-2xl mt-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 active:scale-95"
               >
                 Sign In
               </button>
@@ -96,49 +110,56 @@ export default function Admin() {
   ];
 
   return (
-    <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
-      <div className="w-full md:w-64 bg-card border-r border-primary/5 flex flex-col shadow-sm hidden md:flex sticky top-0 h-screen">
-        <div className="p-6 border-b border-primary/5">
-          <div className="flex items-center gap-3">
-             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-md">
-               <Settings className="text-primary-foreground" size={20} />
+    <div className="min-h-screen bg-background flex flex-col md:flex-row relative overflow-hidden">
+      {/* Background Gradients for Dashboard */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-30">
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[30%] bg-accent/20 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="w-full md:w-72 bg-card/80 backdrop-blur-xl border-r border-primary/5 flex flex-col shadow-sm hidden md:flex sticky top-0 h-screen z-10">
+        <div className="p-8 border-b border-primary/5 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="flex items-center gap-4 relative z-10">
+             <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 shrink-0">
+               <Settings className="text-white" size={24} />
              </div>
              <div>
-               <h2 className="font-heading font-bold text-foreground leading-tight">Admin Portal</h2>
-               <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Vignan High School</p>
+               <h2 className="font-heading font-black text-foreground leading-tight text-lg">Admin Portal</h2>
+               <p className="text-[10px] text-primary uppercase font-black tracking-widest mt-1">Vignan High School</p>
              </div>
           </div>
         </div>
         
-        <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
+        <div className="flex-1 overflow-y-auto py-8 px-6 space-y-2 relative z-10">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm
+              className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 font-bold text-sm
                 ${activeTab === tab.id 
-                  ? "bg-primary text-primary-foreground shadow-md" 
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 scale-[1.02]" 
+                  : "text-muted-foreground hover:bg-primary/5 hover:text-primary hover:scale-[1.02]"
                 }
               `}
             >
-              <tab.icon size={18} /> {tab.label}
+              <tab.icon size={20} /> {tab.label}
             </button>
           ))}
         </div>
         
-        <div className="p-4 border-t border-primary/5">
+        <div className="p-6 border-t border-primary/5 relative z-10">
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition-colors font-medium text-sm"
+            className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors font-bold text-sm"
           >
-            <LogOut size={18} /> Logout
+            <LogOut size={20} /> Logout
           </button>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col min-w-0 bg-background overflow-hidden relative min-h-screen">
-        <div className="md:hidden flex items-center justify-between p-4 bg-card border-b border-primary/5 sticky top-0 z-50">
+      <div className="flex-1 flex flex-col min-w-0 bg-transparent overflow-hidden relative min-h-screen z-10">
+        <div className="md:hidden flex items-center justify-between p-4 bg-card/90 backdrop-blur-md border-b border-primary/5 sticky top-0 z-50">
            <h2 className="font-heading font-bold text-lg">Admin / {tabs.find(t=>t.id===activeTab)?.label}</h2>
            <button onClick={handleLogout} className="p-2 bg-red-50 text-red-500 rounded-lg"><LogOut size={18}/></button>
         </div>
@@ -162,7 +183,7 @@ export default function Admin() {
             >
               {activeTab === 'overview' && (
                 <div className="space-y-8">
-                  <h1 className="text-3xl font-heading font-bold text-foreground">Dashboard Overview</h1>
+                  <h1 className="text-3xl font-heading font-black text-foreground">Dashboard Overview</h1>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <StatCard title="Total Admissions" count={store.admissions.length} icon={FileText} />
                     <StatCard title="Total Enquiries" count={store.enquiries.length} icon={MessageSquare} />
@@ -416,17 +437,18 @@ export default function Admin() {
 
 function StatCard({ title, count, icon: Icon, trend }: any) {
   return (
-    <div className="bg-card p-6 rounded-2xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-      <div className="absolute -right-6 -top-6 w-24 h-24 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors" />
-      <div className="flex justify-between items-start mb-4">
-        <div className="p-3 bg-primary/10 text-primary rounded-xl">
+    <div className="bg-card/80 backdrop-blur-md p-6 rounded-[2rem] border border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+      <div className="absolute -right-6 -top-6 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+      <div className="flex justify-between items-start mb-6">
+        <div className="p-4 bg-primary/10 text-primary rounded-2xl group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-inner">
           <Icon size={24} />
         </div>
-        {trend && <span className="text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-md">{trend}</span>}
+        {trend && <span className="text-xs font-bold text-emerald-600 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">{trend}</span>}
       </div>
       <div>
-        <p className="text-3xl font-heading font-black text-foreground mb-1">{count}</p>
-        <p className="text-sm font-medium text-muted-foreground">{title}</p>
+        <p className="text-4xl font-heading font-black text-foreground mb-1 group-hover:translate-x-1 transition-transform">{count}</p>
+        <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">{title}</p>
       </div>
     </div>
   );
