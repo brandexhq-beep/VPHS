@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp, ChevronDown } from "lucide-react";
+import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp, ChevronDown, Crown, Sparkles, Star } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { useDataStore } from "@/store/dataStore";
 
@@ -430,39 +430,83 @@ const Index = () => {
       </section>
 
       {/* School Toppers Section */}
-      <section className="py-16 md:py-24 bg-background border-t border-primary/5">
-        <div className="container overflow-hidden">
-          <motion.div className="text-center mb-10"
-            initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+      <section className="py-20 md:py-28 bg-background border-t border-primary/5 relative overflow-hidden">
+        {/* Abstract background blobs for added luxury feel */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container overflow-hidden relative z-10">
+          <motion.div className="text-center mb-14"
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-5">
-              <Trophy size={14} className="text-yellow-600" />
-              Our School Toppers
+            <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+              <Sparkles size={14} className="text-yellow-600 animate-pulse" />
+              Our Shining Stars
             </div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Hearty Congratulations To SSLC Toppers 2024 - 2025</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">We are immensely proud of our bright students for their outstanding performance in the board exams.</p>
+            <h2 className="text-3xl md:text-5xl lg:text-5xl font-heading font-black tracking-tight mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Hearty Congratulations To SSLC Toppers
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              We are immensely proud of our bright students for their outstanding performance in the board exams, setting new benchmarks of excellence.
+            </p>
           </motion.div>
           
-          <div className="overflow-hidden mt-8 relative">
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
+          <div className="overflow-hidden mt-12 relative">
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-l from-background to-transparent z-10" />
             
-            <div className="marquee-track gap-4 md:gap-6 flex py-4">
-              {[...toppers, ...toppers, ...toppers].map((topper, idx) => (
-                <div key={idx} className="shrink-0 w-56 md:w-64 bg-card rounded-2xl p-5 shadow-elegant border border-primary/10 flex flex-col items-center justify-center text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-500/20 mb-4 group-hover:border-yellow-500/50 transition-colors shadow-inner relative">
-                    <img src={topper.image} alt={topper.name} className="w-full h-full object-cover" />
+            <div className="marquee-track gap-6 md:gap-8 flex py-8 px-4">
+              {[...toppers, ...toppers, ...toppers].map((topper, idx) => {
+                const isTopScorer = parseFloat(topper.percentage) >= 95;
+                return (
+                  <div key={idx} className={`shrink-0 w-64 md:w-72 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center transition-all duration-500 relative group isolation-auto ${
+                    isTopScorer 
+                      ? 'bg-gradient-to-br from-yellow-500/10 via-background to-amber-500/5 border border-yellow-500/20 shadow-[0_8px_30px_rgb(234,179,8,0.1)] hover:shadow-[0_8px_40px_rgb(234,179,8,0.2)]'
+                      : 'bg-card border border-primary/10 shadow-lg hover:shadow-xl'
+                  }`}>
+                    {/* Decorative elements */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] -z-10" />
+                    {isTopScorer && (
+                      <div className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-500/20 rounded-full blur-2xl group-hover:bg-yellow-500/30 transition-colors" />
+                    )}
+
+                    {/* Image & Crown container */}
+                    <div className="relative mb-6">
+                      {isTopScorer && (
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20 text-yellow-500 drop-shadow-md animate-bounce" style={{ animationDuration: '3s' }}>
+                          <Crown size={32} strokeWidth={2.5} fill="currentColor" className="opacity-90" />
+                        </div>
+                      )}
+                      {/* Avatar wrap */}
+                      <div className={`w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden p-1 shadow-inner relative z-10 bg-gradient-to-br ${isTopScorer ? 'from-yellow-400 to-amber-600' : 'from-primary/40 to-primary/10'} group-hover:scale-105 transition-transform duration-500 ease-out`}>
+                        <div className="w-full h-full rounded-full overflow-hidden border-4 border-background bg-secondary/20">
+                          <img src={topper.image} alt={topper.name} className="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                      </div>
+                      {/* Decorative rings */}
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] rounded-full border border-primary/10 group-hover:border-primary/20 transition-all duration-700 -z-0 group-hover:scale-[1.05]" />
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[135%] h-[135%] rounded-full border border-primary/5 group-hover:border-primary/10 transition-all duration-700 delay-75 -z-0 group-hover:scale-[1.05]" />
+                    </div>
+                    
+                    <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground mb-1 group-hover:text-primary transition-colors">{topper.name}</h3>
+                    
+                    <div className="flex items-center gap-1.5 mb-4 text-yellow-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={14} fill="currentColor" className={isTopScorer ? 'opacity-100' : 'opacity-30'} />
+                      ))}
+                    </div>
+
+                    <div className={`flex flex-col items-center gap-0.5 w-full py-3 rounded-2xl relative overflow-hidden backdrop-blur-sm transition-colors duration-300 ${
+                      isTopScorer ? 'bg-yellow-500/10 group-hover:bg-yellow-500/20' : 'bg-primary/5 group-hover:bg-primary/10'
+                    }`}>
+                     <div className="flex items-baseline gap-1 drop-shadow-sm">
+                      <span className={`text-3xl font-black ${isTopScorer ? 'text-yellow-600' : 'text-primary'}`}>{topper.percentage}</span>
+                     </div>
+                     <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{topper.score}</span>
+                    </div>
                   </div>
-                  
-                  <h3 className="font-heading font-bold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">{topper.name}</h3>
-                  <div className="flex flex-col items-center gap-1 w-full bg-primary/5 py-2 rounded-xl mt-2 border border-primary/10">
-                   <p className="text-xl font-black text-primary">{topper.percentage}</p>
-                   <p className="text-xs text-muted-foreground font-semibold">{topper.score}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -553,32 +597,56 @@ const Index = () => {
       </section>
 
       {/* Admissions CTA */}
-      <section className="container py-20 md:py-32">
+      <section className="container py-20 md:py-32 relative">
         <motion.div
-          className="bg-primary rounded-[2.5rem] p-10 md:p-20 text-center relative overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] max-w-6xl mx-auto"
+          className="rounded-[2.5rem] p-10 md:p-20 text-center relative overflow-hidden shadow-2xl max-w-6xl mx-auto bg-primary isolate border border-primary/20"
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
         >
-          <motion.div
-            className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-accent/15 blur-2xl"
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-secondary/20 blur-2xl"
-            animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }}
-            transition={{ repeat: Infinity, duration: 10, delay: 1, ease: "easeInOut" }}
-          />
+          {/* Animated Mesh Gradient Background Elements */}
+          <div className="absolute inset-0 z-[-1] opacity-50">
+            <motion.div
+              className="absolute top-[-30%] left-[-10%] w-[60%] h-[160%] bg-accent rounded-full mix-blend-screen filter blur-[120px]"
+              animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute top-[-20%] right-[-10%] w-[50%] h-[150%] bg-secondary rounded-full mix-blend-screen filter blur-[100px]"
+              animate={{ rotate: -360, scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            />
+          </div>
+
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1633613286991-611fe299c4bc?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-10" />
+          
+          {/* Subtle noise texture */}
+          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
+
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground mb-6 md:mb-8 leading-tight">Admissions Open for 2025-26</h2>
-            <p className="text-primary-foreground/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium">
-              Give your child the gift of quality education. Join the Vignan family and watch them grow into confident, knowledgeable individuals.
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white backdrop-blur-md border border-white/20 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8 shadow-xl">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              </span>
+              Enrollments Active
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-lg">
+              Admissions Open for 2025-26
+            </h2>
+            <p className="text-white/90 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-md">
+              Give your child the gift of quality education. Join the Vignan family and watch them grow into confident, knowledgeable individuals equipped for the future.
             </p>
-            <Link
-              to="/admissions"
-              className="inline-flex items-center justify-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-white text-primary font-bold rounded-2xl hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group text-lg md:text-xl"
-            >
-              Apply Now <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
+            
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
+              <Link
+                to="/admissions"
+                className="relative inline-flex items-center justify-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-white text-primary font-bold rounded-2xl transition-all duration-300 hover:text-white hover:bg-white/10 hover:backdrop-blur-xl border border-transparent hover:border-white/50 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] overflow-hidden group text-lg md:text-xl"
+              >
+                {/* Button shine effect setup */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite] -z-10" style={{ transform: 'skewX(-20deg)' }} />
+                Apply Now <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </section>
