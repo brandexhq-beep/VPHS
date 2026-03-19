@@ -65,6 +65,17 @@ const events = [
   { title: "Sports Day", date: "January 26, 2025", description: "Inter-house sports competitions celebrating athleticism and teamwork.", image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=600" },
 ];
 
+const toppers = [
+  { name: "Aditi S", score: "620/625", percentage: "99.2%", image: "https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&q=80&w=300" },
+  { name: "Rahul M", score: "618/625", percentage: "98.8%", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" },
+  { name: "Sneha P", score: "615/625", percentage: "98.4%", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=300" },
+  { name: "Karthik R", score: "610/625", percentage: "97.6%", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300" },
+  { name: "Pooja V", score: "608/625", percentage: "97.2%", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" },
+  { name: "Akhil K", score: "605/625", percentage: "96.8%", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=300" },
+  { name: "Nidhi B", score: "602/625", percentage: "96.3%", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" },
+  { name: "Varun K", score: "600/625", percentage: "96.0%", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=300" },
+];
+
 const heroImages = [
   "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=2000",
   "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=2000",
@@ -420,20 +431,28 @@ const Index = () => {
             <p className="text-muted-foreground max-w-lg mx-auto">We are immensely proud of our bright students for their outstanding performance in the board exams.</p>
           </motion.div>
           
-          <motion.div
-            className="max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-elegant border border-primary/10 relative group bg-card p-2 md:p-4"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-             <img 
-               src="/toppers-poster.jpg" 
-               alt="SSLC Toppers 2024-2025" 
-               className="w-full h-auto rounded-xl sm:rounded-2xl object-cover hover:scale-[1.01] transition-transform duration-700"
-             />
-             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/10 to-transparent pointer-events-none rounded-b-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </motion.div>
+          <div className="overflow-hidden mt-8 relative">
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
+            
+            <div className="marquee-track gap-4 md:gap-6 flex py-4">
+              {[...toppers, ...toppers, ...toppers].map((topper, idx) => (
+                <div key={idx} className="shrink-0 w-56 md:w-64 bg-card rounded-2xl p-5 shadow-elegant border border-primary/10 flex flex-col items-center justify-center text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-500/20 mb-4 group-hover:border-yellow-500/50 transition-colors shadow-inner relative">
+                    <img src={topper.image} alt={topper.name} className="w-full h-full object-cover" />
+                  </div>
+                  
+                  <h3 className="font-heading font-bold text-lg text-foreground mb-1 group-hover:text-primary transition-colors">{topper.name}</h3>
+                  <div className="flex flex-col items-center gap-1 w-full bg-primary/5 py-2 rounded-xl mt-2 border border-primary/10">
+                   <p className="text-xl font-black text-primary">{topper.percentage}</p>
+                   <p className="text-xs text-muted-foreground font-semibold">{topper.score}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
