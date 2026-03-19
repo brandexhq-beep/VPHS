@@ -93,32 +93,63 @@ const Admissions = () => {
         <div className="absolute top-40 right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
         <div className="absolute bottom-40 left-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
-        {/* Process */}
-        <div className="bg-card rounded-[2rem] p-8 md:p-12 shadow-lg border border-primary/10 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <motion.div className="flex items-center gap-4 mb-10 relative z-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-              <ClipboardList size={28} className="text-primary" />
+        {/* Process — Premium Timeline */}
+        <div>
+          <motion.div
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+              <ClipboardList size={14} /> Step-by-Step Guide
             </div>
-            <h2 className="text-3xl font-heading font-black text-foreground">Admission Process</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground">Admission Process</h2>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
-            {process.map((step, i) => (
-              <motion.div
-                key={i}
-                className="bg-background rounded-2xl p-6 border border-primary/5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 relative group/step flex flex-col pt-10"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <div className="absolute top-0 right-6 translate-y-[-50%] w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg group-hover/step:scale-110 transition-transform">
-                  <span className="text-white font-black text-xl">{i + 1}</span>
-                </div>
-                <p className="text-foreground/80 font-medium text-sm leading-relaxed">{step}</p>
-              </motion.div>
-            ))}
+
+          <div className="relative">
+            {/* Vertical connector line (mobile) */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/30 via-primary/60 to-transparent md:hidden" />
+
+            <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-5 md:gap-4 lg:gap-6 relative">
+              {/* Horizontal connector line (desktop) */}
+              <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none" />
+
+              {[
+                { icon: Phone, label: "Contact Us", text: "Visit or call for an application form" },
+                { icon: FileText, label: "Submit Docs", text: "Submit application with required documents" },
+                { icon: CheckCircle, label: "Assessment", text: "Attend interaction/assessment session" },
+                { icon: GraduationCap, label: "Confirmation", text: "Receive admission confirmation" },
+                { icon: PenTool, label: "Enrollment", text: "Complete fee payment and enrollment" },
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  className="flex gap-5 md:flex-col md:items-center md:text-center relative"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.12, duration: 0.5 }}
+                >
+                  {/* Step icon bubble */}
+                  <div className="relative shrink-0 flex flex-col items-center md:mb-4">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 ring-4 ring-primary/10 ring-offset-2 ring-offset-background z-10 group-hover:scale-110 transition-transform">
+                      <step.icon size={20} className="text-white md:hidden" />
+                      <step.icon size={26} className="text-white hidden md:block" />
+                    </div>
+                    {/* Step number badge */}
+                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center shadow-md z-20">
+                      {i + 1}
+                    </div>
+                    {/* Mobile connector line segment */}
+                    {i < 4 && <div className="flex-1 w-0.5 bg-primary/20 md:hidden mt-2 min-h-[24px]" />}
+                  </div>
+
+                  {/* Text content */}
+                  <div className="pb-2 md:pb-0 md:px-2 flex-1 md:flex-none">
+                    <p className="font-heading font-black text-foreground mb-1 text-base md:text-sm">{step.label}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{step.text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 
