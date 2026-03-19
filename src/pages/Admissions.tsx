@@ -93,10 +93,10 @@ const Admissions = () => {
         <div className="absolute top-40 right-[-10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
         <div className="absolute bottom-40 left-[-10%] w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -z-10" />
 
-        {/* Process — Premium Timeline */}
+        {/* Process — Simple Clean Steps */}
         <div>
           <motion.div
-            className="text-center mb-14"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           >
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
@@ -105,51 +105,29 @@ const Admissions = () => {
             <h2 className="text-3xl md:text-4xl font-heading font-black text-foreground">Admission Process</h2>
           </motion.div>
 
-          <div className="relative">
-            {/* Vertical connector line (mobile) */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/30 via-primary/60 to-transparent md:hidden" />
-
-            <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-5 md:gap-4 lg:gap-6 relative">
-              {/* Horizontal connector line (desktop) */}
-              <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none" />
-
-              {[
-                { icon: Phone, label: "Contact Us", text: "Visit or call for an application form" },
-                { icon: FileText, label: "Submit Docs", text: "Submit application with required documents" },
-                { icon: CheckCircle, label: "Assessment", text: "Attend interaction/assessment session" },
-                { icon: GraduationCap, label: "Confirmation", text: "Receive admission confirmation" },
-                { icon: PenTool, label: "Enrollment", text: "Complete fee payment and enrollment" },
-              ].map((step, i) => (
-                <motion.div
-                  key={i}
-                  className="flex gap-5 md:flex-col md:items-center md:text-center relative"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, duration: 0.5 }}
-                >
-                  {/* Step icon bubble */}
-                  <div className="relative shrink-0 flex flex-col items-center md:mb-4">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 ring-4 ring-primary/10 ring-offset-2 ring-offset-background z-10 group-hover:scale-110 transition-transform">
-                      <step.icon size={20} className="text-white md:hidden" />
-                      <step.icon size={26} className="text-white hidden md:block" />
-                    </div>
-                    {/* Step number badge */}
-                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-white text-xs font-black flex items-center justify-center shadow-md z-20">
-                      {i + 1}
-                    </div>
-                    {/* Mobile connector line segment */}
-                    {i < 4 && <div className="flex-1 w-0.5 bg-primary/20 md:hidden mt-2 min-h-[24px]" />}
-                  </div>
-
-                  {/* Text content */}
-                  <div className="pb-2 md:pb-0 md:px-2 flex-1 md:flex-none">
-                    <p className="font-heading font-black text-foreground mb-1 text-base md:text-sm">{step.label}</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{step.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="space-y-4">
+            {[
+              { icon: Phone, text: "Visit the school or contact us for an application form" },
+              { icon: FileText, text: "Submit the completed application with required documents" },
+              { icon: CheckCircle, text: "Attend the interaction/assessment session" },
+              { icon: GraduationCap, text: "Receive admission confirmation" },
+              { icon: PenTool, text: "Complete fee payment and enrollment" },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                className="flex items-center gap-5 bg-card rounded-2xl px-6 py-5 border border-primary/10 shadow-sm hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 group"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <span className="w-9 h-9 shrink-0 rounded-full bg-primary text-white font-black text-base flex items-center justify-center shadow-md shadow-primary/30">
+                  {i + 1}
+                </span>
+                <step.icon size={20} className="text-primary shrink-0 group-hover:scale-110 transition-transform" />
+                <p className="text-foreground/80 font-medium text-sm md:text-base leading-relaxed">{step.text}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
