@@ -163,12 +163,23 @@ const Gallery = () => {
                       transition={{ delay: i * 0.05, duration: 0.5, type: 'spring' }}
                       className="break-inside-avoid relative rounded-[2rem] overflow-hidden group shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border border-primary/10"
                     >
-                      <img
-                        src={photo.url}
-                        alt={photo.title}
-                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                        loading="lazy"
-                      />
+                      {photo.url.toLowerCase().endsWith('.mp4') ? (
+                        <video
+                          src={photo.url}
+                          className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                        />
+                      ) : (
+                        <img
+                          src={photo.url}
+                          alt={photo.title}
+                          className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                          loading="lazy"
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-8">
                         <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                           <p className="text-white font-bold font-heading text-xl mb-1 drop-shadow-md">
