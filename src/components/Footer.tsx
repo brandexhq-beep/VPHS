@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <div>
-            <h3 className="font-heading text-xl font-bold mb-4">Vignan Public High School</h3>
+            <h3 className="font-heading text-xl font-bold mb-4">Shaping Tomorrow's Leaders</h3>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              Empowering young minds with knowledge, values, and skills for a brighter future. Knowledge is Power.
+              Vignan Public High School: est from 2002. Empowering young minds with knowledge, values, and skills for a brighter future. Knowledge is Power.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ const Footer = () => {
               </div>
               <div className="flex gap-2 items-center">
                 <Mail size={16} className="shrink-0" />
-                <a href="mailto:info@vignanpublichighschool.com" className="hover:text-primary-foreground transition-colors">info@vignanpublichighschool.com</a>
+                <a href="mailto:vignanpublic2002@gmail.com" className="hover:text-primary-foreground transition-colors">vignanpublic2002@gmail.com</a>
               </div>
             </div>
           </div>

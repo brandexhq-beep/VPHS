@@ -26,8 +26,8 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Vignan Public High School Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shadow-sm bg-white" />
             <div className="hidden sm:block">
-              <p className="font-heading text-sm md:text-base font-bold text-primary leading-tight tracking-tight">Vignan Public High School</p>
-              <p className="font-body text-[10px] md:text-xs text-muted-foreground font-medium uppercase tracking-wider">Knowledge is Power</p>
+              <p className="font-heading text-sm md:text-base font-bold text-primary leading-tight tracking-tight">Shaping Tomorrow's Leaders</p>
+              <p className="font-body text-[10px] md:text-xs text-muted-foreground font-medium uppercase tracking-wider">est from 2002</p>
             </div>
           </Link>
 

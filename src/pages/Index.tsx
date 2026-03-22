@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp, ChevronDown, Crown, Sparkles, Star } from "lucide-react";
+import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp, ChevronDown, Crown, Sparkles, Star, X, Maximize2 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { useDataStore } from "@/store/dataStore";
 
@@ -76,16 +76,6 @@ const toppers = [
   { name: "Deepthi .N", percentage: "95%", score: "SSLC", image: "/Toppers/Deepthi%20N.png" },
   { name: "Rakesh .S", percentage: "95%", score: "SSLC", image: "/Toppers/Rakesh%20S.png" },
   { name: "M. Bharath", percentage: "91%", score: "SSLC", image: "/Toppers/M%20Bharath.png" },
-  { name: "Madan .H.K", percentage: "88%", score: "SSLC", image: "/Toppers/Madan%20H%20K.png" },
-  { name: "Thanushree .N", percentage: "87%", score: "SSLC", image: "/Toppers/Thanushree%20N.png" },
-  { name: "Vidya .R", percentage: "87%", score: "SSLC", image: "/Toppers/Vidya%20R.png" },
-  { name: "Manasa .D", percentage: "86%", score: "SSLC", image: "/Toppers/Manasa%20D.png" },
-  { name: "Sandeep .H", percentage: "84%", score: "SSLC", image: "/Toppers/Sandeep%20H.png" },
-  { name: "Deepa .R", percentage: "81%", score: "SSLC", image: "/Toppers/Deepa%20R.png" },
-  { name: "Abhishek .H", percentage: "78%", score: "SSLC", image: "/Toppers/Abhishek%20H.png" },
-  { name: "Akash .K.N", percentage: "77%", score: "SSLC", image: "/Toppers/Akash%20K%20N.png" },
-  { name: "Maruthi .K.L", percentage: "76%", score: "SSLC", image: "/Toppers/Maruthi%20K%20L.png" },
-  { name: "Harika .N", percentage: "72%", score: "SSLC", image: "/Toppers/Harika%20N.png" },
 ];
 
 const heroImages = [
@@ -97,6 +87,7 @@ const heroImages = [
 const Index = () => {
   const [currentHero, setCurrentHero] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ url: string, title: string } | null>(null);
   const store = useDataStore();
 
   useEffect(() => {
@@ -126,10 +117,10 @@ const Index = () => {
               variants={fadeUp}
               className="font-heading font-bold text-primary tracking-wide text-2xl mb-1"
             >
-              Vignan Public High School
+              Shaping Tomorrow's Leaders
             </motion.p>
             <motion.p variants={fadeUp} className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Est. 2004 &bull; Laggere, Bengaluru
+              est from 2002 &bull; Laggere, Bengaluru
             </motion.p>
           </motion.div>
 
@@ -144,10 +135,10 @@ const Index = () => {
                   className="font-heading font-bold text-primary tracking-wide mb-1"
                   style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
                 >
-                  Vignan Public High School
+                  Shaping Tomorrow's Leaders
                 </motion.p>
                 <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                  Est. 2004 &bull; Laggere, Bengaluru
+                  est from 2002 &bull; Laggere, Bengaluru
                 </motion.p>
               </div>
 
@@ -156,7 +147,7 @@ const Index = () => {
                 className="font-heading font-black text-foreground leading-tight tracking-tight mb-5"
                 style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}
               >
-                Shaping{" "}<span className="text-primary">Tomorrow's</span>{" "}Leaders
+                Vignan{" "}<span className="text-primary">Public High</span>{" "}School
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-lg">
@@ -284,7 +275,7 @@ const Index = () => {
                 20 Years of <span className="text-primary">Academic Excellence</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Vignan Public High School has been shaping confident, curious, and compassionate students since 2004. Our dedicated faculty, world-class facilities, and student-first culture create an environment where learning is a joy.
+                Vignan Public High School has been shaping confident, curious, and compassionate students since 2002. Our dedicated faculty, world-class facilities, and student-first culture create an environment where learning is a joy.
               </p>
               <Link
                 to="/about"
@@ -299,7 +290,7 @@ const Index = () => {
                   { icon: GraduationCap, value: 'LKG–10', label: 'Classes Offered' },
                   { icon: Users,         value: '50+',    label: 'Expert Teachers' },
                   { icon: Trophy,        value: '95%',    label: 'Pass Rate' },
-                  { icon: Clock,         value: '20+',    label: 'Years Legacy' },
+                  { icon: Clock,         value: '22+',    label: 'Years Legacy' },
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -631,7 +622,7 @@ const Index = () => {
             </div>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-lg">
-              Admissions Open for 2025-26
+              Admissions Open for 2026-27
             </h2>
             <p className="text-white/90 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-md">
               Give your child the gift of quality education. Join the Vignan family and watch them grow into confident, knowledgeable individuals equipped for the future.
@@ -662,7 +653,11 @@ const Index = () => {
         <div className="overflow-hidden mb-3 relative">
           <div className="marquee-track gap-3">
             {[...store.gallery, ...store.gallery].map((photo, idx) => (
-              <div key={`${photo.id}-${idx}`} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
+              <div 
+                key={`${photo.id}-${idx}`} 
+                className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5 cursor-pointer"
+                onClick={() => setSelectedImage({ url: photo.url, title: photo.title })}
+              >
                 {photo.url.toLowerCase().endsWith('.mp4') ? (
                   <video 
                     src={photo.url} 
@@ -672,7 +667,9 @@ const Index = () => {
                 ) : (
                   <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+                </div>
                 <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.title}</span>
               </div>
             ))}
@@ -683,7 +680,11 @@ const Index = () => {
         <div className="overflow-hidden relative">
           <div className="marquee-track-rtl gap-3">
             {[...store.gallery.slice().reverse(), ...store.gallery.slice().reverse()].map((photo, idx) => (
-              <div key={`${photo.id}-rev-${idx}`} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
+              <div 
+                key={`${photo.id}-rev-${idx}`} 
+                className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5 cursor-pointer"
+                onClick={() => setSelectedImage({ url: photo.url, title: photo.title })}
+              >
                 {photo.url.toLowerCase().endsWith('.mp4') ? (
                   <video 
                     src={photo.url} 
@@ -693,7 +694,9 @@ const Index = () => {
                 ) : (
                   <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+                </div>
                 <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.title}</span>
               </div>
             ))}
@@ -782,7 +785,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.476!2d77.5142!3d13.0165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAxJzAwLjAiTiA3N8KwMzAnNTEuMSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d297.81898299517366!2d77.5163474218309!3d13.013258966391247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d01e6ba3ac9%3A0xef2e35891bf830e1!2sVignan%20Public%20High%20School!5e1!3m2!1sen!2sin!4v1774161978920!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -794,6 +797,54 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+      {/* Lightbox / Popup Window */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-10"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center gap-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-0 right-0 md:-top-12 md:-right-12 text-white hover:text-primary transition-colors p-2"
+                onClick={() => setSelectedImage(null)}
+              >
+                <X size={32} />
+              </button>
+              
+              <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-2xl bg-black/20">
+                {selectedImage.url.toLowerCase().endsWith('.mp4') ? (
+                  <video 
+                    src={selectedImage.url} 
+                    className="max-w-full max-h-full object-contain"
+                    controls
+                    autoPlay
+                  />
+                ) : (
+                  <img 
+                    src={selectedImage.url} 
+                    alt={selectedImage.title} 
+                    className="max-w-full max-h-full object-contain shadow-2xl"
+                  />
+                )}
+              </div>
+              
+              {selectedImage.title && (
+                <p className="text-white text-lg font-bold">{selectedImage.title}</p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

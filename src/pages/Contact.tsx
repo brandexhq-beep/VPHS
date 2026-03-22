@@ -38,7 +38,7 @@ const Contact = () => {
       title: "Address",
       content: (
         <p className="text-sm text-foreground/70 leading-relaxed font-medium">
-          28 & 29 Phase, 3, 3rd Main Rd<br />
+          28 & 29 Phase, 3rd Main Rd<br />
           Rajeshwari Nagar, Chamundi Nagar<br />
           Laggere, Bengaluru, Karnataka 560058
         </p>
@@ -52,7 +52,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: <a href="mailto:info@vignanpublichighschool.com" className="text-sm font-bold text-foreground hover:text-primary transition-colors break-all">info@vignanpublichighschool.com</a>,
+      content: <a href="mailto:vignanpublic2002@gmail.com" className="text-sm font-bold text-foreground hover:text-primary transition-colors break-all">vignanpublic2002@gmail.com</a>,
     },
     {
       icon: Clock,
@@ -147,7 +147,7 @@ const Contact = () => {
             >
               <div className="absolute inset-0 bg-primary/5 pointer-events-none group-hover:opacity-0 transition-opacity duration-500 z-10 mix-blend-overlay" />
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.476!2d77.5142!3d13.0165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAxJzAwLjAiTiA3N8KwMzAnNTEuMSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d297.81898299517366!2d77.5163474218309!3d13.013258966391247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d01e6ba3ac9%3A0xef2e35891bf830e1!2sVignan%20Public%20High%20School!5e1!3m2!1sen!2sin!4v1774161978920!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "brightness(0.95) contrast(1.1)" }}
