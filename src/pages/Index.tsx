@@ -39,7 +39,7 @@ const facilities = [
   },
   {
     category: "Skill Development",
-    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=800",
+    image: "/skill-development.png",
     color: "from-purple-900/90",
     items: [
       { icon: Code, name: "Code Club" },

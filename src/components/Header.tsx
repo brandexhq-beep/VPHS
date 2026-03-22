@@ -21,22 +21,22 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex justify-center w-full px-4 pt-4 md:pt-6 pointer-events-none">
-      <header className="pointer-events-auto w-full max-w-5xl bg-background/80 backdrop-blur-xl border border-primary/10 shadow-[0_8px_32px_-4px_rgba(0,0,0,0.05)] rounded-2xl transition-all duration-300">
+      <header className="pointer-events-auto w-full max-w-[1400px] bg-background/80 backdrop-blur-xl border border-primary/10 shadow-[0_8px_32px_-4px_rgba(0,0,0,0.05)] rounded-2xl transition-all duration-300">
         <div className="flex items-center justify-between px-4 md:px-6 h-16 md:h-18">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 shrink-0">
             <img src={logo} alt="Vignan Public High School Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shadow-sm bg-white" />
-            <div className="hidden sm:block">
-              <p className="font-heading text-sm md:text-base font-bold text-primary leading-tight tracking-tight uppercase">Vignan Public School</p>
-              <p className="font-body text-[10px] md:text-xs text-muted-foreground font-medium uppercase tracking-wider">est from 2002 &bull; laggere</p>
+            <div className="flex flex-col whitespace-nowrap">
+              <p className="font-heading text-xs sm:text-sm md:text-base font-black text-primary leading-tight tracking-tight uppercase">Vignan Public High School</p>
+              <p className="font-body text-[8px] sm:text-[10px] md:text-xs text-muted-foreground font-medium uppercase tracking-wider">est from 2002 &bull; laggere, bengaluru</p>
             </div>
           </Link>
-
+ 
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 group overflow-hidden ${
+                className={`relative px-2 xl:px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 group overflow-hidden ${
                   location.pathname === link.path
                     ? "text-primary"
                     : "text-foreground/70 hover:text-primary"

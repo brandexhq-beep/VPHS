@@ -206,7 +206,6 @@ export const useDataStore = create<DataStore>()(
         { id: "photo-science exhibiton-3.jpeg", title: "Science exhibiton - 3", url: "/gallery/science%20exhibiton/3.jpeg", folderId: "folder-6" },
         { id: "photo-science exhibiton-4.jpeg", title: "Science exhibiton - 4", url: "/gallery/science%20exhibiton/4.jpeg", folderId: "folder-6" },
         { id: "photo-science exhibiton-5.jpeg", title: "Science exhibiton - 5", url: "/gallery/science%20exhibiton/5.jpeg", folderId: "folder-6" },
-        { id: "photo-sports day-1.jpeg", title: "Sports day - 1", url: "/gallery/sports%20day/1.jpeg", folderId: "folder-8" },
         { id: "photo-sports day-10.jpeg", title: "Sports day - 10", url: "/gallery/sports%20day/10.jpeg", folderId: "folder-8" },
         { id: "photo-sports day-11.jpeg", title: "Sports day - 11", url: "/gallery/sports%20day/11.jpeg", folderId: "folder-8" },
         { id: "photo-sports day-12.jpeg", title: "Sports day - 12", url: "/gallery/sports%20day/12.jpeg", folderId: "folder-8" },
