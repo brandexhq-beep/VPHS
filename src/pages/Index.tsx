@@ -79,9 +79,9 @@ const toppers = [
 ];
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=2000",
-  "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=2000",
-  "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=2000",
+  "/hero/1.jpeg",
+  "/hero/2.jpeg",
+  "/hero/3.jpeg",
 ];
 
 const Index = () => {
