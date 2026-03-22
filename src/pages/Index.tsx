@@ -254,7 +254,7 @@ const Index = () => {
               className="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000"
+                src="/hero/about.jpeg"
                 alt="Students at Vignan"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
