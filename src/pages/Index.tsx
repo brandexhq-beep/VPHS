@@ -391,11 +391,11 @@ const Index = () => {
             >
               <div className="w-56 h-64 bg-secondary rounded-xl flex items-center justify-center shadow-elegant overflow-hidden group relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=500" 
-                  alt="Principal" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  src="/Faculty/amar narayan.jpeg" 
+                  alt="Amar Narayan - Principal" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
             </motion.div>
             <motion.div
@@ -785,23 +785,55 @@ const Index = () => {
               <span className="text-sm">Laggere, Bengaluru, Karnataka</span>
             </div>
           </motion.div>
-          <motion.div
-            className="rounded-xl overflow-hidden shadow-elegant aspect-video max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d297.81898299517366!2d77.5163474218309!3d13.013258966391247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d01e6ba3ac9%3A0xef2e35891bf830e1!2sVignan%20Public%20High%20School!5e1!3m2!1sen!2sin!4v1774161978920!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Vignan Public High School Location"
-            />
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+            {/* Map Column */}
+            <motion.div
+              className="lg:col-span-2 rounded-[2rem] overflow-hidden shadow-elegant border border-primary/5 min-h-[400px]"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d297.81898299517366!2d77.5163474218309!3d13.013258966391247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d01e6ba3ac9%3A0xef2e35891bf830e1!2sVignan%20Public%20High%20School!5e1!3m2!1sen!2sin!4v1774161978920!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Vignan Public High School Location"
+              />
+            </motion.div>
+
+            {/* QR Code / Info Column */}
+            <motion.div
+              className="bg-card rounded-[2rem] p-8 border border-primary/10 shadow-lg flex flex-col items-center justify-center text-center relative overflow-hidden group"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              
+              <div className="relative mb-6">
+                <div className="w-40 h-40 bg-white p-3 rounded-2xl shadow-xl border border-primary/5 group-hover:scale-105 transition-transform duration-500">
+                  <img src="/loc.png" alt="Scan to navigate" className="w-full h-full object-contain" />
+                </div>
+                <div className="absolute -bottom-3 -right-3 bg-primary text-white p-2 rounded-xl shadow-lg animate-bounce">
+                   <MapPin size={20} />
+                </div>
+              </div>
+
+              <h3 className="font-heading font-bold text-xl text-primary mb-2">Scan to Navigate</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Scan this QR code with your phone camera to quickly get directions to our school.
+              </p>
+              
+              <div className="mt-8 pt-6 border-t border-primary/10 w-full">
+                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2">Campus Address</p>
+                 <p className="text-sm font-medium text-foreground">3rd Main Rd, Laggere, Bengaluru, 560058</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
       {/* Lightbox / Popup Window */}

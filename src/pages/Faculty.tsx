@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Users, Briefcase, Tag } from "lucide-react";
+import { Mail, Users, Briefcase, Tag, ArrowRight } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
 
 const Faculty = () => {
@@ -63,64 +63,52 @@ const Faculty = () => {
                 return (
                   <motion.div
                     key={member.id}
-                    className="bg-card rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-primary/10 relative group isolate"
+                    className="bg-card rounded-[2.5rem] overflow-hidden shadow-elegant hover:shadow-2xl transition-all duration-500 border border-primary/10 relative group isolate flex flex-col"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-                    
-                    <div className="aspect-[4/3] bg-gradient-to-br from-primary/5 via-primary/10 to-accent/5 flex items-center justify-center overflow-hidden relative shadow-inner">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                      
-                      <motion.div
-                        className="w-28 h-28 rounded-full bg-background flex items-center justify-center border-4 border-primary/10 shadow-md group-hover:border-primary/30 transition-colors duration-500 relative z-10 overflow-hidden"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {member.image ? (
-                          <img 
-                            src={member.image} 
-                            alt={member.name} 
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                          />
-                        ) : (
-                          <span className="text-3xl font-heading font-black text-primary/40 group-hover:text-primary/70 transition-colors drop-shadow-sm">{initials}</span>
-                        )}
-                      </motion.div>
+                    {/* Full Top Image Section */}
+                    <div className="aspect-[4/4.5] overflow-hidden relative">
+                      {member.image ? (
+                        <img 
+                          src={member.image} 
+                          alt={member.name} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center">
+                           <span className="text-5xl font-heading font-black text-primary/20">{initials}</span>
+                        </div>
+                      )}
+                      {/* Gradient Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
                     
-                    <div className="p-6 md:p-8">
-                      <h3 className="font-heading font-bold text-2xl text-foreground group-hover:text-primary transition-colors mb-2">{member.name}</h3>
-                      <div className="inline-flex items-center gap-1.5 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-5">
+                    <div className="p-8 -mt-12 relative z-10 bg-card rounded-t-[2rem]">
+                      <div className="inline-flex items-center gap-1.5 bg-primary text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 shadow-lg shadow-primary/20">
                         <Briefcase size={12} />
                         {member.role}
                       </div>
+
+                      <h3 className="font-heading font-bold text-2xl text-foreground group-hover:text-primary transition-colors mb-4">{member.name}</h3>
                       
-                      <div className="space-y-3 mb-6">
-                        <div className="flex items-start gap-2.5">
-                          <Tag size={16} className="text-primary shrink-0 mt-0.5" />
-                          <div>
+                      <div className="grid grid-cols-2 gap-4 mb-8">
+                        <div className="space-y-1">
                             <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Department</p>
-                            <p className="text-sm font-medium text-foreground">{member.department}</p>
-                          </div>
+                            <p className="text-sm font-semibold text-foreground">{member.department}</p>
                         </div>
-                        <div className="flex items-start gap-2.5">
-                          <Users size={16} className="text-primary shrink-0 mt-0.5" />
-                          <div>
+                        <div className="space-y-1">
                             <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Experience</p>
-                            <p className="text-sm font-medium text-foreground">{member.experience}</p>
-                          </div>
+                            <p className="text-sm font-semibold text-foreground">{member.experience}</p>
                         </div>
                       </div>
                       
-                      <div className="pt-4 border-t border-primary/10">
-                        <a href="mailto:info@vignanpublichighschool.com" className="inline-flex items-center gap-2 text-sm font-bold text-primary/70 hover:text-primary transition-colors group/mail">
-                          <span className="p-1.5 rounded-full bg-primary/10 group-hover/mail:bg-primary group-hover/mail:text-white transition-colors">
-                            <Mail size={14} />
-                          </span>
-                          Contact
+                      <div className="pt-6 border-t border-primary/10 flex items-center justify-between">
+                        <a href={`mailto:vignanpublic2002@gmail.com`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all duration-300">
+                          Reach Out <ArrowRight size={16} />
                         </a>
                       </div>
                     </div>
