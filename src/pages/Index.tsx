@@ -49,7 +49,7 @@ const facilities = [
   },
   {
     category: "Physical & Wellness",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800",
     color: "from-emerald-900/90",
     items: [
       { icon: Heart, name: "Yoga" },
