@@ -42,3 +42,4 @@ This project is built with standard, high-performance web tooling:
 - `src/pages`: Individual route components (Home, About, Admissions, etc.)
 - `src/components`: Reusable layout and UI elements, including standard accessible components from shadcn.
 - `src/index.css`: Global styling tokens and glassmorphism utilities.
+# vphs
