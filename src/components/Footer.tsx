@@ -59,10 +59,15 @@ const Footer = () => {
 
         <div className="mt-10 pt-6 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
           <div>© {new Date().getFullYear()} Vignan Public School. All rights reserved.</div>
-          <div className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
+          <a 
+            href="https://brandex-lab.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity hover:underline decoration-white/30 underline-offset-4"
+          >
             <span>Designed and Managed by</span>
             <span className="font-black tracking-tighter text-sm text-white">BRANDEX</span>
-          </div>
+          </a>
         </div>
       </div>
     </footer>
