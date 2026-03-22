@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FolderHeart, Image as ImageIcon, ArrowLeft, Camera, Sparkles, Layers } from "lucide-react";
 import { useDataStore } from "@/store/dataStore";
+import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
   const store = useDataStore();
-  const [activeFolder, setActiveFolder] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const folderParam = searchParams.get('folder');
+  const [activeFolder, setActiveFolder] = useState<string | null>(folderParam);
+
+  useEffect(() => {
+    setActiveFolder(folderParam);
+  }, [folderParam]);
+
+  const handleFolderChange = (id: string | null) => {
+    if (id) {
+      setSearchParams({ folder: id });
+    } else {
+      setSearchParams({});
+    }
+    setActiveFolder(id);
+  };
 
   // Group photos into folders. If no active folder, currentPhotos is empty (removing "Other Photos").
   const currentPhotos = activeFolder 
@@ -62,7 +78,7 @@ const Gallery = () => {
               className="mb-12 flex items-center gap-4 border-b border-primary/10 pb-6"
             >
                <button 
-                 onClick={() => setActiveFolder(null)}
+                 onClick={() => handleFolderChange(null)}
                  className="w-12 h-12 rounded-full bg-primary/5 hover:bg-primary/10 flex items-center justify-center text-primary transition-all duration-300 hover:shadow-md hover:-translate-x-1"
                >
                  <ArrowLeft size={20} />
@@ -100,7 +116,7 @@ const Gallery = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.1, duration: 0.5 }}
                       className="group cursor-pointer relative"
-                      onClick={() => setActiveFolder(folder.id)}
+                      onClick={() => handleFolderChange(folder.id)}
                     >
                       {/* Stacked paper effect behind the main card */}
                       <div className="absolute inset-0 bg-primary/10 rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 origin-bottom-right shadow-sm" />

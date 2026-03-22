@@ -76,10 +76,18 @@ const Faculty = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                       
                       <motion.div
-                        className="w-28 h-28 rounded-full bg-background flex items-center justify-center border-4 border-primary/10 shadow-md group-hover:border-primary/30 transition-colors duration-500 relative z-10"
+                        className="w-28 h-28 rounded-full bg-background flex items-center justify-center border-4 border-primary/10 shadow-md group-hover:border-primary/30 transition-colors duration-500 relative z-10 overflow-hidden"
                         whileHover={{ scale: 1.05 }}
                       >
-                        <span className="text-3xl font-heading font-black text-primary/40 group-hover:text-primary/70 transition-colors drop-shadow-sm">{initials}</span>
+                        {member.image ? (
+                          <img 
+                            src={member.image} 
+                            alt={member.name} 
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          />
+                        ) : (
+                          <span className="text-3xl font-heading font-black text-primary/40 group-hover:text-primary/70 transition-colors drop-shadow-sm">{initials}</span>
+                        )}
                       </motion.div>
                     </div>
                     

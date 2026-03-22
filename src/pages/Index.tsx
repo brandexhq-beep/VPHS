@@ -171,7 +171,7 @@ const Index = () => {
 
               {/* Stats */}
               <motion.div variants={fadeUp} className="flex items-center gap-8 pt-6 border-t border-primary/10">
-                {[{ n: '20+', l: 'Years' }, { n: '1500+', l: 'Students' }, { n: '95%', l: 'Pass Rate' }, { n: '50+', l: 'Faculty' }].map(s => (
+                {[{ n: '20+', l: 'Years' }, { n: '1500+', l: 'Students' }, { n: '98%', l: 'Pass Rate' }, { n: '50+', l: 'Faculty' }].map(s => (
                   <div key={s.l}>
                     <p className="text-lg font-black text-primary">{s.n}</p>
                     <p className="text-xs text-muted-foreground">{s.l}</p>
@@ -230,7 +230,7 @@ const Index = () => {
                 transition={{ delay: 0.8 }}
               >
                 <p className="text-xs text-muted-foreground">Board Pass Rate</p>
-                <p className="text-2xl font-black text-primary">95%</p>
+                <p className="text-2xl font-black text-primary">98%</p>
               </motion.div>
             </motion.div>
 
@@ -289,7 +289,7 @@ const Index = () => {
                 {[
                   { icon: GraduationCap, value: 'LKG–10', label: 'Classes Offered' },
                   { icon: Users,         value: '50+',    label: 'Expert Teachers' },
-                  { icon: Trophy,        value: '95%',    label: 'Pass Rate' },
+                   { icon: Trophy,        value: '98%',    label: 'Pass Rate' },
                   { icon: Clock,         value: '22+',    label: 'Years Legacy' },
                 ].map((item, i) => (
                   <motion.div
@@ -516,35 +516,42 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {events.map((event, i) => (
-              <motion.div
-                key={event.title}
-                className="bg-background rounded-2xl p-0 group relative overflow-hidden shadow-elegant border border-primary/5 flex flex-col"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              >
-                <div className="h-44 w-full overflow-hidden relative">
-                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute top-4 right-4 bg-primary text-primary-foreground pb-1 px-3 pt-2 rounded-lg text-center shadow-lg border-2 border-white/20 backdrop-blur-md">
-                    <p className="text-[10px] font-bold text-primary-foreground/90 uppercase tracking-widest">{event.date.split(' ')[0]}</p>
-                    <p className="text-2xl font-black text-white leading-tight">{event.date.split(' ')[1].replace(',', '')}</p>
+            {store.galleryFolders.slice(6, 9).map((folder, i) => {
+              const photos = store.gallery.filter(p => p.folderId === folder.id);
+              const coverPhoto = photos.length > 0 ? photos[0].url : "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=600";
+              const date = ["January 26, 2025", "February 20, 2025", "March 15, 2025"][i];
+              
+              return (
+                <motion.div
+                  key={folder.id}
+                  className="bg-background rounded-2xl p-0 group relative overflow-hidden shadow-elegant border border-primary/5 flex flex-col cursor-pointer"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.12 }}
+                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  onClick={() => window.location.href = `/gallery?folder=${folder.id}`}
+                >
+                  <div className="h-44 w-full overflow-hidden relative">
+                    <img src={coverPhoto} alt={folder.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute top-4 right-4 bg-primary text-primary-foreground pb-1 px-3 pt-2 rounded-lg text-center shadow-lg border-2 border-white/20 backdrop-blur-md">
+                      <p className="text-[10px] font-bold text-primary-foreground/90 uppercase tracking-widest">{date.split(' ')[0]}</p>
+                      <p className="text-2xl font-black text-white leading-tight">{date.split(' ')[1].replace(',', '')}</p>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                </div>
-                <div className="p-5 sm:p-6 flex-1 flex flex-col relative bg-background">
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{event.title}</h3>
-                  <p className="text-sm text-foreground/70 leading-relaxed mb-4">{event.description}</p>
-                  <div className="mt-auto flex items-center gap-2 text-xs font-bold text-primary/70 uppercase tracking-wider pt-3 border-t border-primary/10">
-                    <Calendar size={13} className="text-primary shrink-0" />
-                    <span>{event.date}</span>
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col relative bg-background">
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{folder.title}</h3>
+                    <p className="text-sm text-foreground/70 leading-relaxed mb-4">View memories and highlights from our {folder.title.toLowerCase()}.</p>
+                    <div className="mt-auto flex items-center gap-2 text-xs font-bold text-primary/70 uppercase tracking-wider pt-3 border-t border-primary/10">
+                      <Calendar size={13} className="text-primary shrink-0" />
+                      <span>{date}</span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
       <Link to="/events" className="sm:hidden mt-6 inline-flex items-center gap-1 text-accent font-medium text-sm hover:underline">
             View all events <ArrowRight size={14} />

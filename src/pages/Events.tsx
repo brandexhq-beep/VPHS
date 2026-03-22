@@ -1,19 +1,22 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Sparkles } from "lucide-react";
 import { useState } from "react";
-
-const events = [
-  { title: "Annual Day Celebrations 2025", date: "2025-03-15", description: "A grand celebration of student achievements with cultural performances, awards, and special guest appearances.", upcoming: true },
-  { title: "Science Exhibition", date: "2025-02-20", description: "Students showcase innovative science projects and experiments to parents and judges.", upcoming: true },
-  { title: "Republic Day Celebration", date: "2025-01-26", description: "Patriotic celebration with flag hoisting, cultural programs, and speeches honoring the nation.", upcoming: false },
-  { title: "Sports Day", date: "2025-01-15", description: "Inter-house sports competitions celebrating athleticism, teamwork, and sportsmanship.", upcoming: false },
-  { title: "Christmas & New Year Carnival", date: "2024-12-23", description: "Festive celebrations with games, food stalls, and performances by students.", upcoming: false },
-  { title: "Children's Day", date: "2024-11-14", description: "Special activities and events organized by teachers to celebrate the spirit of childhood.", upcoming: false },
-];
+import { useDataStore } from "@/store/dataStore";
 
 const Events = () => {
+  const store = useDataStore();
   const [showAll, setShowAll] = useState(false);
-  const displayed = showAll ? events : events.slice(0, 4);
+  
+  // Create dynamic events from gallery folders
+  const dynamicEvents = store.galleryFolders.map((folder, i) => ({
+    id: folder.id,
+    title: folder.title,
+    date: new Date(2025, 2 - (i % 3), 15 - (i * 5)).toISOString(), // Simulated dates for variety
+    description: `Relive the best moments and highlights from our ${folder.title.toLowerCase()} celebration. Browse through the collection of memories.`,
+    upcoming: i < 2 // First two as "upcoming" for mockup feel
+  }));
+
+  const displayed = showAll ? dynamicEvents : dynamicEvents.slice(0, 6);
 
   return (
     <div className="bg-background min-h-screen">
@@ -44,7 +47,7 @@ const Events = () => {
               Events & Activities
             </h1>
             <p className="text-white/80 leading-relaxed text-lg md:text-xl font-medium drop-shadow-md">
-              Stay updated with the latest happenings, celebrations, and important dates at Vignan Public High School.
+              Stay updated with the latest happenings, celebrations, and important dates at Vignan Public School.
             </p>
           </motion.div>
         </div>
@@ -68,15 +71,16 @@ const Events = () => {
 
               return (
                 <motion.div
-                  key={event.title}
+                  key={event.id}
                   className={`relative flex flex-col sm:flex-row gap-8 sm:gap-0 ${isEven ? 'sm:flex-row-reverse' : ''}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
+                  onClick={() => window.location.href = `/gallery?folder=${event.id}`}
                 >
                   {/* Timeline dot/icon */}
-                  <div className="absolute left-6 sm:left-[50%] top-6 sm:top-1/2 w-14 h-14 translate-x-[-50%] sm:translate-y-[-50%] rounded-2xl bg-card border-4 border-background shadow-lg flex items-center justify-center z-10 hidden sm:flex">
+                  <div className="absolute left-6 sm:left-[50%] top-6 sm:top-1/2 w-14 h-14 translate-x-[-50%] sm:translate-y-[-50%] rounded-2xl bg-card border-4 border-background shadow-lg flex items-center justify-center z-10 hidden sm:flex pointer-events-none">
                     {event.upcoming ? (
                       <div className="relative flex items-center justify-center w-full h-full rounded-xl bg-primary/10">
                          <span className="animate-ping absolute inline-flex h-4 w-4 rounded-full bg-primary opacity-60"></span>
@@ -98,14 +102,14 @@ const Events = () => {
                   </div>
 
                   {/* Content Card */}
-                  <div className={`flex-1 ${isEven ? 'sm:pr-16' : 'sm:pl-16'} relative`}>
+                  <div className={`flex-1 ${isEven ? 'sm:pr-16' : 'sm:pl-16'} relative cursor-pointer`}>
                     <div className={`bg-card rounded-[2rem] p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border ${event.upcoming ? "border-primary/20 bg-gradient-to-br from-primary/[0.03] to-transparent" : "border-border/50"} relative overflow-hidden group h-full`}>
                       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
                       
                       {event.upcoming && (
                         <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full mb-4 shadow-sm">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                          Upcoming
+                          Full Coverage
                         </span>
                       )}
                       
@@ -117,8 +121,12 @@ const Events = () => {
                          </span>
                       </div>
 
-                      <h3 className={`font-heading font-black text-2xl mb-3 ${event.upcoming ? 'text-foreground group-hover:text-primary transition-colors' : 'text-foreground/80'}`}>{event.title}</h3>
-                      <p className={`text-base leading-relaxed font-medium ${event.upcoming ? 'text-muted-foreground' : 'text-muted-foreground/80'}`}>{event.description}</p>
+                      <h3 className={`font-heading font-black text-2xl mb-3 ${event.upcoming ? 'text-foreground group-hover:text-primary transition-colors' : 'text-foreground/80 group-hover:text-primary transition-colors'}`}>{event.title}</h3>
+                      <p className={`text-base leading-relaxed font-medium mb-4 ${event.upcoming ? 'text-muted-foreground' : 'text-muted-foreground/80'}`}>{event.description}</p>
+                      
+                      <div className="flex items-center gap-2 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        View Photos <ArrowRight size={14} />
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -126,7 +134,7 @@ const Events = () => {
             })}
           </div>
 
-          {!showAll && events.length > 4 && (
+          {!showAll && dynamicEvents.length > 6 && (
             <motion.div className="flex justify-center mt-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <button
                 onClick={() => setShowAll(true)}

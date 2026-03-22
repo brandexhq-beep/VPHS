@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <div>
-            <h3 className="font-heading text-xl font-bold mb-4">Shaping Tomorrow's Leaders</h3>
+            <h3 className="font-heading text-xl font-bold mb-4">Vignan Public School</h3>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              Vignan Public High School: est from 2002. Empowering young minds with knowledge, values, and skills for a brighter future. Knowledge is Power.
+              Empowering young minds with knowledge, values, and skills for a brighter future. Knowledge is Power.
             </p>
           </div>
 
@@ -57,8 +57,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-primary-foreground/10 text-center text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} Vignan Public High School. All rights reserved.
+        <div className="mt-10 pt-6 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
+          <div>© {new Date().getFullYear()} Vignan Public School. All rights reserved.</div>
+          <div className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
+            <span>Designed and Managed by</span>
+            <span className="font-black tracking-tighter text-sm text-white">BRANDEX</span>
+          </div>
         </div>
       </div>
     </footer>

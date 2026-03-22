@@ -39,6 +39,7 @@ export interface FacultyMember {
   department: string;
   role: string;
   experience: string;
+  image?: string;
 }
 
 export interface Testimonial {
@@ -242,9 +243,10 @@ export const useDataStore = create<DataStore>()(
       })),
 
       faculty: [
-        { id: crypto.randomUUID(), name: "Amar Narayan", department: "Administration", role: "Principal", experience: "20+ Years" },
-        { id: crypto.randomUUID(), name: "Dr. Suresh K", department: "Sciences", role: "HOD Science", experience: "15 Years" },
-        { id: crypto.randomUUID(), name: "Meera Reddy", department: "Mathematics", role: "Senior Teacher", experience: "12 Years" }
+        { id: crypto.randomUUID(), name: "C M Mala", department: "Management", role: "Chairman", experience: "25+ Years", image: "/faculty/C m mala.jpeg" },
+        { id: crypto.randomUUID(), name: "Krishnaiah C", department: "Administration", role: "Principal", experience: "20+ Years", image: "/faculty/Krishnaiah c.jpeg" },
+        { id: crypto.randomUUID(), name: "Amar Narayan", department: "Administration", role: "Vice Principal", experience: "20+ Years", image: "/faculty/amar narayan.jpeg" },
+        { id: crypto.randomUUID(), name: "Varsha", department: "Management", role: "Managing Trustee", experience: "10+ Years", image: "/faculty/Varsha.png" }
       ],
       addFaculty: (faculty) => set((state) => ({
         faculty: [{ ...faculty, id: crypto.randomUUID() }, ...state.faculty]
