@@ -214,9 +214,8 @@ const Index = () => {
                     <button
                       key={idx}
                       onClick={() => setCurrentHero(idx)}
-                      className={`transition-all duration-300 rounded-full ${
-                        idx === currentHero ? 'w-5 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
-                      }`}
+                      className={`transition-all duration-300 rounded-full ${idx === currentHero ? 'w-5 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
+                        }`}
                     />
                   ))}
                 </div>
@@ -288,9 +287,9 @@ const Index = () => {
               <div className="grid grid-cols-2 gap-3 mt-2">
                 {[
                   { icon: GraduationCap, value: 'LKG–10', label: 'Classes Offered' },
-                  { icon: Users,         value: '50+',    label: 'Expert Teachers' },
-                   { icon: Trophy,        value: '98%',    label: 'Pass Rate' },
-                  { icon: Clock,         value: '22+',    label: 'Years Legacy' },
+                  { icon: Users, value: '50+', label: 'Expert Teachers' },
+                  { icon: Trophy, value: '98%', label: 'Pass Rate' },
+                  { icon: Clock, value: '22+', label: 'Years Legacy' },
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
@@ -326,7 +325,7 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Our Premium Facilities</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">World-class infrastructure designed to foster holistic learning and future-ready skills.</p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
             {facilities.map((cat, i) => (
               <motion.div
@@ -342,17 +341,17 @@ const Index = () => {
                 <div className="absolute inset-0 w-full h-full z-0">
                   <img src={cat.image} alt={cat.category} className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700 ease-in-out" />
                 </div>
-                
+
                 {/* Dark filled overlay gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-t ${cat.color} via-black/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500 z-10`} />
-                
+
                 {/* Content on top */}
                 <div className="relative z-20 p-8 pt-20 flex flex-col justify-end h-full transform transition-transform duration-300">
                   <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white border border-white/30 shadow-lg">
                     {i === 1 ? <TrendingUp size={24} /> : i === 0 ? <FlaskConical size={24} /> : i === 2 ? <Code size={24} /> : <Heart size={24} />}
                   </div>
                   <h3 className="font-heading text-2xl font-bold text-white mb-2 leading-tight">{cat.category}</h3>
-                  
+
                   <div className="overflow-hidden mt-2">
                     <ul className="space-y-3 relative text-white/90">
                       {cat.items.map((item, j) => (
@@ -390,9 +389,9 @@ const Index = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="w-56 h-64 bg-secondary rounded-xl flex items-center justify-center shadow-elegant overflow-hidden group relative">
-                <img 
-                  src="/Faculty/amar narayan.jpeg" 
-                  alt="Amar Narayan - Principal" 
+                <img
+                  src="/Faculty/amar narayan.jpeg"
+                  alt="Amar Narayan - Vice Principal"
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -412,7 +411,7 @@ const Index = () => {
                 </blockquote>
                 <div className="mt-6 pl-6">
                   <p className="font-heading font-semibold text-primary text-lg">Amar Narayan</p>
-                  <p className="text-sm text-muted-foreground">Principal</p>
+                  <p className="text-sm text-muted-foreground">Vice Principal</p>
                 </div>
               </div>
             </motion.div>
@@ -441,20 +440,19 @@ const Index = () => {
               We are immensely proud of our bright students for their outstanding performance in the board exams, setting new benchmarks of excellence.
             </p>
           </motion.div>
-          
+
           <div className="overflow-hidden mt-12 relative">
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-r from-background to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-l from-background to-transparent z-10" />
-            
+
             <div className="marquee-track gap-6 md:gap-8 flex py-8 px-4">
               {[...toppers, ...toppers, ...toppers].map((topper, idx) => {
                 const isTopScorer = parseFloat(topper.percentage) >= 95;
                 return (
-                  <div key={idx} className={`shrink-0 w-64 md:w-72 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center transition-all duration-500 relative group isolation-auto ${
-                    isTopScorer 
+                  <div key={idx} className={`shrink-0 w-64 md:w-72 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center transition-all duration-500 relative group isolation-auto ${isTopScorer
                       ? 'bg-gradient-to-br from-yellow-500/10 via-background to-amber-500/5 border border-yellow-500/20 shadow-[0_8px_30px_rgb(234,179,8,0.1)] hover:shadow-[0_8px_40px_rgb(234,179,8,0.2)]'
                       : 'bg-card border border-primary/10 shadow-lg hover:shadow-xl'
-                  }`}>
+                    }`}>
                     {/* Decorative elements */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] -z-10" />
                     {isTopScorer && (
@@ -478,22 +476,21 @@ const Index = () => {
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] rounded-full border border-primary/10 group-hover:border-primary/20 transition-all duration-700 -z-0 group-hover:scale-[1.05]" />
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[135%] h-[135%] rounded-full border border-primary/5 group-hover:border-primary/10 transition-all duration-700 delay-75 -z-0 group-hover:scale-[1.05]" />
                     </div>
-                    
+
                     <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground mb-1 group-hover:text-primary transition-colors">{topper.name}</h3>
-                    
+
                     <div className="flex items-center gap-1.5 mb-4 text-yellow-500">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={14} fill="currentColor" className={isTopScorer ? 'opacity-100' : 'opacity-30'} />
                       ))}
                     </div>
 
-                    <div className={`flex flex-col items-center gap-0.5 w-full py-3 rounded-2xl relative overflow-hidden backdrop-blur-sm transition-colors duration-300 ${
-                      isTopScorer ? 'bg-yellow-500/10 group-hover:bg-yellow-500/20' : 'bg-primary/5 group-hover:bg-primary/10'
-                    }`}>
-                     <div className="flex items-baseline gap-1 drop-shadow-sm">
-                      <span className={`text-3xl font-black ${isTopScorer ? 'text-yellow-600' : 'text-primary'}`}>{topper.percentage}</span>
-                     </div>
-                     <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{topper.score}</span>
+                    <div className={`flex flex-col items-center gap-0.5 w-full py-3 rounded-2xl relative overflow-hidden backdrop-blur-sm transition-colors duration-300 ${isTopScorer ? 'bg-yellow-500/10 group-hover:bg-yellow-500/20' : 'bg-primary/5 group-hover:bg-primary/10'
+                      }`}>
+                      <div className="flex items-baseline gap-1 drop-shadow-sm">
+                        <span className={`text-3xl font-black ${isTopScorer ? 'text-yellow-600' : 'text-primary'}`}>{topper.percentage}</span>
+                      </div>
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">{topper.score}</span>
                     </div>
                   </div>
                 );
@@ -520,7 +517,7 @@ const Index = () => {
               const photos = store.gallery.filter(p => p.folderId === folder.id);
               const coverPhoto = photos.length > 0 ? photos[0].url : "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=600";
               const date = ["January 26, 2025", "February 20, 2025", "March 15, 2025"][i];
-              
+
               return (
                 <motion.div
                   key={folder.id}
@@ -553,40 +550,40 @@ const Index = () => {
               );
             })}
           </div>
-      <Link to="/events" className="sm:hidden mt-6 inline-flex items-center gap-1 text-accent font-medium text-sm hover:underline">
+          <Link to="/events" className="sm:hidden mt-6 inline-flex items-center gap-1 text-accent font-medium text-sm hover:underline">
             View all events <ArrowRight size={14} />
           </Link>
         </div>
       </section>
-      
+
       {/* Testimonials Marquee Section */}
       <section className="py-16 md:py-24 bg-primary/5 overflow-hidden border-y border-primary/10">
         <div className="text-center mb-10 container">
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">What Parents Say</h2>
           <p className="text-muted-foreground max-w-lg mx-auto">Hear from our community of parents and students.</p>
         </div>
-        
+
         {store.testimonials.length === 0 ? (
           <div className="text-center py-10 container">
-             <p className="text-muted-foreground bg-primary/5 py-4 rounded-xl border border-primary/10">No testimonials yet.</p>
+            <p className="text-muted-foreground bg-primary/5 py-4 rounded-xl border border-primary/10">No testimonials yet.</p>
           </div>
         ) : (
           <div className="overflow-hidden mb-6 relative">
             <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
             <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
-            
+
             <div className="marquee-track gap-6 flex">
               {/* Duplicate array for smooth scrolling */}
               {[...store.testimonials, ...store.testimonials, ...store.testimonials].map((review, idx) => (
                 <div key={idx} className="shrink-0 w-72 md:w-96 bg-card rounded-2xl p-6 shadow-elegant border border-primary/5 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                   <p className="text-sm md:text-base text-foreground/80 leading-relaxed italic mb-4">"{review.text}"</p>
-                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-primary/5">
-                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">{review.name.charAt(0)}</div>
-                     <div>
-                       <p className="font-heading font-bold text-foreground text-sm">{review.name}</p>
-                       <p className="text-xs text-muted-foreground">{review.role}</p>
-                     </div>
-                   </div>
+                  <p className="text-sm md:text-base text-foreground/80 leading-relaxed italic mb-4">"{review.text}"</p>
+                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-primary/5">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">{review.name.charAt(0)}</div>
+                    <div>
+                      <p className="font-heading font-bold text-foreground text-sm">{review.name}</p>
+                      <p className="text-xs text-muted-foreground">{review.role}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -615,7 +612,7 @@ const Index = () => {
           </div>
 
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1633613286991-611fe299c4bc?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-10" />
-          
+
           {/* Subtle noise texture */}
           <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E')" }}></div>
 
@@ -627,14 +624,14 @@ const Index = () => {
               </span>
               Enrollments Active
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white mb-6 md:mb-8 leading-tight drop-shadow-lg">
               Admissions Open for 2026-27
             </h2>
             <p className="text-white/90 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-md">
               Give your child the gift of quality education. Join the Vignan family and watch them grow into confident, knowledgeable individuals equipped for the future.
             </p>
-            
+
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <Link
                 to="/admissions"
@@ -660,14 +657,14 @@ const Index = () => {
         <div className="overflow-hidden mb-3 relative">
           <div className="marquee-track gap-3">
             {[...store.gallery, ...store.gallery].map((photo, idx) => (
-              <div 
-                key={`${photo.id}-${idx}`} 
+              <div
+                key={`${photo.id}-${idx}`}
                 className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5 cursor-pointer"
                 onClick={() => setSelectedImage({ url: photo.url, title: photo.title })}
               >
                 {photo.url.toLowerCase().endsWith('.mp4') ? (
-                  <video 
-                    src={photo.url} 
+                  <video
+                    src={photo.url}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     autoPlay muted loop playsInline
                   />
@@ -687,14 +684,14 @@ const Index = () => {
         <div className="overflow-hidden relative">
           <div className="marquee-track-rtl gap-3">
             {[...store.gallery.slice().reverse(), ...store.gallery.slice().reverse()].map((photo, idx) => (
-              <div 
-                key={`${photo.id}-rev-${idx}`} 
+              <div
+                key={`${photo.id}-rev-${idx}`}
                 className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5 cursor-pointer"
                 onClick={() => setSelectedImage({ url: photo.url, title: photo.title })}
               >
                 {photo.url.toLowerCase().endsWith('.mp4') ? (
-                  <video 
-                    src={photo.url} 
+                  <video
+                    src={photo.url}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     autoPlay muted loop playsInline
                   />
@@ -813,13 +810,13 @@ const Index = () => {
               viewport={{ once: true }}
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              
+
               <div className="relative mb-6">
                 <div className="w-40 h-40 bg-white p-3 rounded-2xl shadow-xl border border-primary/5 group-hover:scale-105 transition-transform duration-500">
                   <img src="/loc.png" alt="Scan to navigate" className="w-full h-full object-contain" />
                 </div>
                 <div className="absolute -bottom-3 -right-3 bg-primary text-white p-2 rounded-xl shadow-lg animate-bounce">
-                   <MapPin size={20} />
+                  <MapPin size={20} />
                 </div>
               </div>
 
@@ -827,10 +824,10 @@ const Index = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Scan this QR code with your phone camera to quickly get directions to our school.
               </p>
-              
+
               <div className="mt-8 pt-6 border-t border-primary/10 w-full">
-                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2">Campus Address</p>
-                 <p className="text-sm font-medium text-foreground">3rd Main Rd, Laggere, Bengaluru, 560058</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2">Campus Address</p>
+                <p className="text-sm font-medium text-foreground">3rd Main Rd, Laggere, Bengaluru, 560058</p>
               </div>
             </motion.div>
           </div>
@@ -859,24 +856,24 @@ const Index = () => {
               >
                 <X size={32} />
               </button>
-              
+
               <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-2xl bg-black/20">
                 {selectedImage.url.toLowerCase().endsWith('.mp4') ? (
-                  <video 
-                    src={selectedImage.url} 
+                  <video
+                    src={selectedImage.url}
                     className="max-w-full max-h-full object-contain"
                     controls
                     autoPlay
                   />
                 ) : (
-                  <img 
-                    src={selectedImage.url} 
-                    alt={selectedImage.title} 
+                  <img
+                    src={selectedImage.url}
+                    alt={selectedImage.title}
                     className="max-w-full max-h-full object-contain shadow-2xl"
                   />
                 )}
               </div>
-              
+
               {selectedImage.title && (
                 <p className="text-white text-lg font-bold">{selectedImage.title}</p>
               )}
