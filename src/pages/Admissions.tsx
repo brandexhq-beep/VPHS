@@ -23,9 +23,9 @@ const documents = [
 ];
 
 const eligibility = [
-  { grade: "LKG", age: "3.5 yrs as of June 1st" },
-  { grade: "UKG", age: "4.5 yrs as of June 1st" },
-  { grade: "Class 1", age: "5.5 yrs as of June 1st" },
+  { grade: "LKG", age: "3.10 yrs as of June 1st" },
+  { grade: "UKG", age: "4.10 yrs as of June 1st" },
+  { grade: "Class 1", age: "5.10 yrs as of June 1st" },
   { grade: "Class 2–10", age: "Based on TC & assessment" },
 ];
 
@@ -105,11 +105,10 @@ const Admissions = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all duration-200 ${
-                    activeTab === tab.id
+                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all duration-200 ${activeTab === tab.id
                       ? "bg-primary text-white shadow-md"
                       : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                  }`}
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -188,7 +187,7 @@ const Admissions = () => {
                       <option value="" disabled>Select Grade</option>
                       <option value="LKG">LKG</option>
                       <option value="UKG">UKG</option>
-                      {[1,2,3,4,5,6,7,8,9,10].map(n => <option key={n} value={`Class ${n}`}>Class {n}</option>)}
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={`Class ${n}`}>Class {n}</option>)}
                     </select>
                   </div>
                   <div className="space-y-1.5">
