@@ -66,9 +66,11 @@ const events = [
 ];
 
 const toppers = [
+  { name: "Deepashree R", percentage: "98%", score: "SSLC", image: "/Toppers/Deepashree R.png" },
   { name: "Lohith .L", percentage: "98%", score: "SSLC", image: "/Toppers/Lohith.png" },
   { name: "Kiran .S", percentage: "97%", score: "SSLC", image: "/Toppers/Kiran.s.png" },
   { name: "Ramya .K", percentage: "97%", score: "SSLC", image: "/Toppers/Ramya%20k.png" },
+  { name: "Koushikeswara R E", percentage: "96%", score: "SSLC", image: "/Toppers/KOWSHIK R E .png" },
   { name: "Namratha .Y", percentage: "96%", score: "SSLC", image: "/Toppers/Namratha%20Y.png" },
   { name: "Bhanuprakash .B", percentage: "96%", score: "SSLC", image: "/Toppers/BhanuPrakash.png" },
   { name: "Yashodha .N", percentage: "96%", score: "SSLC", image: "/Toppers/Yashoda%20n.png" },
@@ -88,7 +90,16 @@ const Index = () => {
   const [currentHero, setCurrentHero] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState<{ url: string, title: string } | null>(null);
+  const [showBanner, setShowBanner] = useState(false);
   const store = useDataStore();
+
+  useEffect(() => {
+    // Show banner after 2 seconds
+    const timer = setTimeout(() => {
+      setShowBanner(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -462,7 +473,7 @@ const Index = () => {
                     {/* Image & Crown container */}
                     <div className="relative mb-6">
                       {isTopScorer && (
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20 text-yellow-500 drop-shadow-md animate-bounce" style={{ animationDuration: '3s' }}>
+                        <div className="absolute -top-6 left-0 w-full flex justify-center z-20 text-yellow-500 drop-shadow-md animate-bounce" style={{ animationDuration: '3s' }}>
                           <Crown size={32} strokeWidth={2.5} fill="currentColor" className="opacity-90" />
                         </div>
                       )}
@@ -833,6 +844,43 @@ const Index = () => {
           </div>
         </div>
       </section>
+      {/* Banner Popup */}
+      <AnimatePresence>
+        {showBanner && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={() => setShowBanner(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative max-w-2xl w-full bg-background rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowBanner(false)}
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-primary text-white flex items-center justify-center transition-all duration-300 backdrop-blur-md border border-white/20 shadow-lg group"
+              >
+                <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+              </button>
+              
+              <div className="relative group/banner">
+                <img 
+                  src="/banner.jpeg" 
+                  alt="Vignan Public High School Announcement" 
+                  className="w-full h-auto object-contain max-h-[85vh]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Lightbox / Popup Window */}
       <AnimatePresence>
         {selectedImage && (
